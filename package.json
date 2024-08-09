@@ -1,0 +1,86 @@
+{
+  "name": "sanity-plugin-media-video",
+  "version": "1.0.0",
+  "description": "A Sanity plugin for adding a media object (Image/Video) to your sanity studio schemas and displaying the media with built-in functionalities such as auto-play, custom PiP on scroll, etc.",
+  "keywords": [
+    "sanity",
+    "sanity-plugin",
+    "sanity-plugin-media-video"
+  ],
+  "homepage": "https://github.com/evelan-de/sanity-plugin-media-video#readme",
+  "bugs": {
+    "url": "https://github.com/evelan-de/sanity-plugin-media-video/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/evelan-de/sanity-plugin-media-video.git"
+  },
+  "license": "MIT",
+  "author": "Evelan <kontakt@evelan.de>",
+  "sideEffects": false,
+  "type": "commonjs",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "sanity.json",
+    "src",
+    "v2-incompatible.js"
+  ],
+  "scripts": {
+    "build": "plugin-kit verify-package --silent && pkg-utils build --strict --check --clean",
+    "format": "prettier --write --cache --ignore-unknown .",
+    "link-watch": "plugin-kit link-watch",
+    "lint": "eslint .",
+    "prepublishOnly": "npm run build",
+    "watch": "pkg-utils watch --strict",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@sanity/incompatible-plugin": "1.0.4",
+    "@sanity/ui": "2.8.8"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "19.4.0",
+    "@commitlint/config-conventional": "19.2.2",
+    "@sanity/pkg-utils": "6.10.9",
+    "@sanity/plugin-kit": "4.0.18",
+    "@sanity/semantic-release-preset": "5.0.0",
+    "@types/react": "18.3.3",
+    "@typescript-eslint/eslint-plugin": "6.7.5",
+    "@typescript-eslint/parser": "6.7.5",
+    "eslint": "8.57.0",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-config-sanity": "7.1.2",
+    "eslint-plugin-import": "2.29.1",
+    "eslint-plugin-prettier": "5.2.1",
+    "eslint-plugin-react": "7.35.0",
+    "eslint-plugin-react-hooks": "4.6.2",
+    "eslint-plugin-simple-import-sort": "12.1.1",
+    "eslint-plugin-unused-imports": "3.2.0",
+    "husky": "9.1.4",
+    "lint-staged": "15.2.8",
+    "prettier": "3.3.3",
+    "prettier-plugin-packagejson": "2.5.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "sanity": "3.53.0",
+    "styled-components": "6.1.12",
+    "typescript": "5.5.4"
+  },
+  "peerDependencies": {
+    "react": "^18",
+    "sanity": "^3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

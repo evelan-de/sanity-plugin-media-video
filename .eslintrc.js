@@ -42,8 +42,6 @@ module.exports = {
         ignoreRestSiblings: true,
       },
     ],
-    '@typescript-eslint/prefer-optional-chain': ['warn'],
-    '@typescript-eslint/no-floating-promises': 'warn',
     'no-console': [
       'error',
       {

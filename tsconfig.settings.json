@@ -17,6 +17,11 @@
     "isolatedModules": true,
 
     // Don't emit by default, pkg-utils will ignore this when generating .d.ts files
-    "noEmit": true
-  }
+    "noEmit": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "src/*": ["src/*"]
+    },
+  },
 }

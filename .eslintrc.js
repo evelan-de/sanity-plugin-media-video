@@ -42,10 +42,26 @@ module.exports = {
         ignoreRestSiblings: true,
       },
     ],
+    '@typescript-eslint/prefer-optional-chain': ['warn'],
+    '@typescript-eslint/no-floating-promises': 'warn',
     'no-console': [
       'error',
       {
         allow: ['error'],
+      },
+    ],
+    // Import statement rules
+    'no-restricted-imports': [
+      'error',
+      {
+        patterns: [
+          /**
+           * This pattern prevents us from using relative path imports
+           *
+           * @link https://stackoverflow.com/a/65684336
+           */
+          '.*',
+        ],
       },
     ],
     'import/named': 0,

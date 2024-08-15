@@ -12,32 +12,33 @@ npm install sanity-plugin-media-video
 
 ## Usage
 
-Add it as a plugin in `sanity.config.ts` (or .js):
+Add it as a plugin in sanity.config.ts (or .js):
 
+### Basic configuration
 ```ts
+// sanity.config.ts
+
 import { defineConfig } from 'sanity';
-import { syncContentPlugin } from 'sanity-plugin-media-video';
+import { mediaVideoPlugin } from 'sanity-plugin-media-video';
 
 export default defineConfig({
   //...
   plugins: [
     // ...other plugins
-    sanityPluginMediaVideo(),
+    mediaVideoPlugin(),
   ],
 });
 ```
 
-Just add directly the defineField for copyPaste directly into any of your referenced block array like so:
+Add it as a `type` to one of your defined fields like so:
 
 ```ts
-import { defineConfig } from 'sanity';
-import { copyPaste } from 'sanity-plugin-sync-content';
-
 export default defineType({
   name: 'my-section',
   title: 'My Example Section',
   type: 'object',
   fields: [
+    // ...your-other-fields
     defineField({
       name: 'my-custom-media-field',
       title: 'My Custom Media Field',

@@ -48,20 +48,6 @@ module.exports = {
         allow: ['error'],
       },
     ],
-    // Import statement rules
-    'no-restricted-imports': [
-      'error',
-      {
-        patterns: [
-          /**
-           * This pattern prevents us from using relative path imports
-           *
-           * @link https://stackoverflow.com/a/65684336
-           */
-          '.*',
-        ],
-      },
-    ],
     'import/named': 0,
     'import/no-unresolved': 'off',
     'import/no-cycle': [
@@ -86,7 +72,6 @@ module.exports = {
         '@typescript-eslint/consistent-type-assertions': ['off'],
         '@typescript-eslint/no-explicit-any': ['off'],
         'react/require-default-props': ['off'],
-        'import/no-cycle': ['off'],
       },
     },
   ],

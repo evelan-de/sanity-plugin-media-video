@@ -1,2 +1,5 @@
 // export the plugin
-export { MediaVideoPlugin } from './plugin/plugin';
+export { mediaVideoPlugin } from './plugin/plugin';
+
+// export the types
+export * from './types';

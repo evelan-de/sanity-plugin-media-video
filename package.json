@@ -46,11 +46,14 @@
   },
   "dependencies": {
     "@sanity/incompatible-plugin": "1.0.4",
-    "@sanity/ui": "2.8.8"
+    "@sanity/ui": "2.8.8",
+    "sanity-plugin-ui-intl": "^1.1.0",
+    "zod": "3.23.8"
   },
   "devDependencies": {
     "@commitlint/cli": "19.4.0",
     "@commitlint/config-conventional": "19.2.2",
+    "@sanity/browserslist-config": "1.0.3",
     "@sanity/pkg-utils": "6.10.9",
     "@sanity/plugin-kit": "4.0.18",
     "@sanity/semantic-release-preset": "5.0.0",
@@ -80,6 +83,7 @@
     "react": "^18",
     "sanity": "^3"
   },
+  "browserslist": "extends @sanity/browserslist-config",
   "engines": {
     "node": ">=18"
   }

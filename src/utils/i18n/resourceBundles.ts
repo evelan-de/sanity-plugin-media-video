@@ -1,4 +1,7 @@
-import { removeUndefinedLocaleResources } from 'sanity';
+import {
+  defineLocaleResourceBundle,
+  removeUndefinedLocaleResources,
+} from 'sanity';
 
 export const DEFAULT_SCHEMA_TRANSLATIONS = removeUndefinedLocaleResources({
   'image.title': 'Image CUISTOMM',
@@ -23,10 +26,12 @@ export const DEFAULT_SCHEMA_TRANSLATIONS = removeUndefinedLocaleResources({
   'muxVideo.required.title': 'Mux Video is required',
 });
 
-export const DEFAULT_RESOURCE_BUNDLE = {
+export const DEFAULT_SCHEMA_RESOURCE = {
   schema: DEFAULT_SCHEMA_TRANSLATIONS,
 };
 
-export const DEFAULT_RESOURCE_BUNDLE2 = {
-  schema: { ...DEFAULT_SCHEMA_TRANSLATIONS, 'image.title': 'ITS OVERWRITTEN' },
-};
+export const DEFAULT_RESOURCE_BUNDLE_EN = defineLocaleResourceBundle({
+  locale: 'en-EN',
+  namespace: 'schema',
+  resources: DEFAULT_SCHEMA_RESOURCE,
+});

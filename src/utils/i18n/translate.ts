@@ -11,12 +11,20 @@ export type ResourcesKeys = {
   [K in keyof typeof DEFAULT_SCHEMA_RESOURCE]: keyof (typeof DEFAULT_SCHEMA_RESOURCE)[K];
 };
 
-export const resources = {
-  en: DEFAULT_SCHEMA_RESOURCE,
+export type Resources = {
+  [key: string]: {
+    [K in keyof ResourcesKeys]: (typeof DEFAULT_SCHEMA_RESOURCE)['schema'];
+  };
 };
 
-// When providing the default locale, we are just telling the plugin which locale is used in /
-export const translate = configureTranslate<ResourcesKeys, NamespaceKeys>(
-  resources,
-  DEFAULT_LOCALE, // Default locale
-);
+// Just pass the "locale" as the default locale as the locale from the 'sanity-plugin-ui-intl' is hardcoded to only use 'en,de,ru'
+export const translate = ({
+  customResources,
+}: {
+  customResources: Resources;
+}) => {
+  return configureTranslate<ResourcesKeys, NamespaceKeys>(
+    customResources,
+    DEFAULT_LOCALE, // Default locale
+  );
+};

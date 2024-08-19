@@ -47,7 +47,8 @@
   "dependencies": {
     "@sanity/incompatible-plugin": "1.0.4",
     "@sanity/ui": "2.8.8",
-    "sanity-plugin-ui-intl": "^1.1.0",
+    "react-player": "2.16.0",
+    "sanity-plugin-ui-intl": "1.1.0",
     "zod": "3.23.8"
   },
   "devDependencies": {
@@ -60,6 +61,7 @@
     "@types/react": "18.3.3",
     "@typescript-eslint/eslint-plugin": "6.7.5",
     "@typescript-eslint/parser": "6.7.5",
+    "autoprefixer": "10.4.20",
     "eslint": "8.57.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-config-sanity": "7.1.2",
@@ -71,12 +73,14 @@
     "eslint-plugin-unused-imports": "3.2.0",
     "husky": "9.1.4",
     "lint-staged": "15.2.8",
+    "postcss": "8.4.41",
     "prettier": "3.3.3",
     "prettier-plugin-packagejson": "2.5.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "sanity": "3.53.0",
     "styled-components": "6.1.12",
+    "tailwindcss": "3.4.10",
     "typescript": "5.5.4"
   },
   "peerDependencies": {

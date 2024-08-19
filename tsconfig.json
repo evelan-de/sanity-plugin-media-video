@@ -4,7 +4,8 @@
     "./src", 
     "./package.config.ts", 
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "tailwind.config.ts"
   ],
   "exclude": [
     "node_modules",

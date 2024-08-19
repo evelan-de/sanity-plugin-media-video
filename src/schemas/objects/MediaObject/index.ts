@@ -1,5 +1,6 @@
 import { defineField, defineType } from 'sanity';
 
+import VideoInputField from '../../../components/VideoInputField';
 import { MediaVideoPluginOptions } from '../../../types/MediaVideoPluginOptions';
 import { DEFAULT_SCHEMA_TRANSLATIONS } from '../../../utils/i18n/resourceBundles';
 import { Resources, translate } from '../../../utils/i18n/translate';
@@ -143,6 +144,9 @@ const mediaObject = (pluginOptions: void | MediaVideoPluginOptions) => {
           }),
           Rule.uri({ scheme: ['http', 'https'] }),
         ],
+        components: {
+          input: VideoInputField,
+        },
       }),
       defineField({
         name: 'muxVideo',

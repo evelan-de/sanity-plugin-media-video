@@ -5,8 +5,8 @@
 
     "target": "esnext",
     "jsx": "preserve",
-    "module": "ESNext",
-    "moduleResolution": "Node",
+    "module": "preserve",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "moduleDetection": "force",

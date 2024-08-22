@@ -48,6 +48,7 @@
     "@sanity/incompatible-plugin": "1.0.4",
     "@sanity/ui": "2.8.8",
     "class-variance-authority": "0.7.0",
+    "react-intersection-observer": "9.13.0",
     "react-player": "2.16.0",
     "sanity-image": "0.1.9",
     "sanity-plugin-ui-intl": "1.1.0",

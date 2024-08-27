@@ -23,14 +23,59 @@
     ".": {
       "source": "./src/index.ts",
       "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
       "default": "./dist/index.js"
+    },
+    "./types": {
+      "source": "./src/exports/types/index.ts",
+      "import": "./dist/types.mjs",
+      "require": "./dist/types.js",
+      "default": "./dist/types.js"
+    },
+    "./renderer": {
+      "source": "./src/exports/components/index.ts",
+      "import": "./dist/renderer.mjs",
+      "require": "./dist/renderer.js",
+      "default": "./dist/renderer.js"
+    },
+    "./hooks": {
+      "source": "./src/exports/hooks/index.ts",
+      "import": "./dist/hooks.mjs",
+      "require": "./dist/hooks.js",
+      "default": "./dist/hooks.js"
+    },
+    "./contexts": {
+      "source": "./src/exports/contexts/index.ts",
+      "import": "./dist/contexts.mjs",
+      "require": "./dist/contexts.js",
+      "default": "./dist/contexts.js"
     },
     "./package.json": "./package.json"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "types": [
+        "./dist/types.d.ts"
+      ],
+      "hooks": [
+        "./dist/hooks.d.ts"
+      ],
+      "contexts": [
+        "./dist/contexts.d.ts"
+      ],
+      "renderer": [
+        "./dist/renderer.d.ts"
+      ]
+    }
+  },
   "files": [
     "dist",
+    "types.js",
+    "renderer.js",
+    "hooks.js",
+    "contexts.js",
     "sanity.json",
     "src",
     "v2-incompatible.js"

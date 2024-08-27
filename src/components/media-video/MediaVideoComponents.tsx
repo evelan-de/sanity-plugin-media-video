@@ -4,7 +4,15 @@ import { SanityImage } from 'sanity-image';
 
 import { type SanityImageType } from '../../types/schema';
 import { cn } from '../../utils/cvaUtils';
-import { isSanityImage } from '../../utils/typeGuards';
+import PlayButtonIcon from '../icons/PlayButtonIcon';
+
+/**
+ * https://github.com/cookpete/react-player/issues/1690
+ * Might have got to do with something about bundling issue with react-player
+ */
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore bundling issue with react-player
+const Player = ReactPlayer.default as typeof ReactPlayer;
 
 /**
  * Use this component to wrap a whole `MediaVideo` component.
@@ -85,21 +93,35 @@ const MediaVideoImage = React.forwardRef<
     { className, imagePreview, sanityImageProps, imageClassName, ...props },
     ref,
   ) => {
+    if (!imagePreview) return null;
+
+    const url = imagePreview.asset.url;
+    const lastSlashIndex = url.lastIndexOf('/');
+    const baseUrl = url.substring(0, lastSlashIndex + 1);
+
     return (
-      <>
-        {isSanityImage(imagePreview) && imagePreview.asset && (
-          <div ref={ref} className={cn('h-full', className)} {...props}>
-            <SanityImage
-              id={imagePreview._id}
-              baseUrl={imagePreview.asset.url}
-              alt={imagePreview.altText || ''}
-              sizes='85vw, (min-width: 1920px) 75vw, (min-width: 2240px) 60vw'
-              className={cn('h-full w-full object-cover', imageClassName)}
-              {...sanityImageProps}
-            />
-          </div>
-        )}
-      </>
+      <div ref={ref} className={cn('h-full', className)} {...props}>
+        <SanityImage
+          id={imagePreview.asset._id}
+          baseUrl={baseUrl}
+          alt={imagePreview.altText || ''}
+          preview={imagePreview.asset.metadata?.lqip}
+          sizes='85vw, (min-width: 1920px) 75vw, (min-width: 2240px) 60vw'
+          className={cn('h-full w-full object-cover', imageClassName)}
+          mode='cover'
+          hotspot={{
+            x: imagePreview.hotspot?.x || 0,
+            y: imagePreview.hotspot?.y || 0,
+          }}
+          crop={{
+            top: imagePreview.crop?.top || 0,
+            bottom: imagePreview.crop?.bottom || 0,
+            left: imagePreview.crop?.left || 0,
+            right: imagePreview.crop?.right || 0,
+          }}
+          {...sanityImageProps}
+        />
+      </div>
     );
   },
 );
@@ -150,18 +172,7 @@ const MediaVideoPlayButton = React.forwardRef<
           'flex h-full w-full items-center justify-center rounded-full bg-black transition duration-300 group-hover/videoImage:scale-110',
         )}
       >
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          viewBox='0 0 24 24'
-          fill='currentColor'
-          className='z-[1] ml-[.375rem] h-[1.2469rem] w-[1.08rem] fill-white md:h-[2.0787rem] md:w-[1.8rem] lg:h-[2.5981rem] lg:w-[2.25rem]'
-        >
-          <path
-            fillRule='evenodd'
-            d='M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z'
-            clipRule='evenodd'
-          />
-        </svg>
+        <PlayButtonIcon className='z-[1] ml-[.375rem] h-[1.2469rem] w-[1.08rem] md:h-[2.0787rem] md:w-[1.8rem] lg:h-[2.5981rem] lg:w-[2.25rem]' />
       </div>
     )}
   </div>
@@ -182,7 +193,7 @@ const MediaVideoPlayer = ({
   ...reactPlayerProps
 }: MediaVideoPlayerProps) => {
   return (
-    <ReactPlayer
+    <Player
       className={cn('overflow-hidden', className)}
       width='100%'
       height='100%'

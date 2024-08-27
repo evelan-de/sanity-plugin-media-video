@@ -1,12 +1,10 @@
-'use client';
-
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { type InViewHookResponse } from 'react-intersection-observer';
 import { OnProgressProps } from 'react-player/base';
 
 import { useMediaVideoContext } from './MediaVideoContext';
 
-type UseVideoPlaybackProps = {
+type UseMediaVideoPlaybackProps = {
   isAutoPlay: boolean | null;
   isPipAutomatic: boolean;
   intersectionObserver: InViewHookResponse;
@@ -23,7 +21,7 @@ type UseVideoPlaybackProps = {
 /**
  * Custom hook to manage the state and behavior of video playback in the MediaVideo component.
  */
-const useVideoPlayback = ({
+const useMediaVideoPlayback = ({
   isAutoPlay,
   isPipAutomatic,
   intersectionObserver,
@@ -35,7 +33,7 @@ const useVideoPlayback = ({
   onReady,
   onPipEnable,
   onPipDisable,
-}: UseVideoPlaybackProps) => {
+}: UseMediaVideoPlaybackProps) => {
   const { pipIdActive, setPipIdActive } = useMediaVideoContext();
   const { inView: componentIsInView, entry } = intersectionObserver;
 
@@ -209,7 +207,6 @@ const useVideoPlayback = ({
       }
     } else {
       // Switch from desktop to mobile, continue video playback if previously played
-      // eslint-disable-next-line no-lonely-if
       if (desktopPopoutPlay && componentIsInView && playInPopout) {
         setIsPopoutOpen(false);
 
@@ -267,4 +264,4 @@ const useVideoPlayback = ({
   };
 };
 
-export default useVideoPlayback;
+export { useMediaVideoPlayback };

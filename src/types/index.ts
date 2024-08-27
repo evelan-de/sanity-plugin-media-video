@@ -1,3 +1,4 @@
-import * as MediaVideoPluginOptions from './MediaVideoPluginOptions.js';
+import * as MediaVideoPluginOptions from './MediaVideoPluginOptions';
+import * as MediaVideoSchemaTypes from './schema';
 
-export { MediaVideoPluginOptions };
+export { MediaVideoPluginOptions, MediaVideoSchemaTypes };

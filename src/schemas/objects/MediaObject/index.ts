@@ -1,36 +1,21 @@
 import { defineField, defineType } from 'sanity';
 
-import VideoInputField from '../../../components/VideoInputField';
+import MediaVideoI18nBooleanInput from '../../../components/sanity/MediaVideoI18nBooleanInput';
+import MediaVideoI18nFieldInput from '../../../components/sanity/MediaVideoI18nFieldInput';
+import MediaVideoI18nStringListInput from '../../../components/sanity/MediaVideoI18nStringListInput';
+import VideoInputField from '../../../components/sanity/VideoInputField';
 import { MediaVideoPluginOptions } from '../../../types/MediaVideoPluginOptions';
-import { DEFAULT_SCHEMA_TRANSLATIONS } from '../../../utils/i18n/resourceBundles';
-import { Resources, translate } from '../../../utils/i18n/translate';
 
 const mediaObject = (pluginOptions: void | MediaVideoPluginOptions) => {
-  const { translationSchema, isImageRequired } = pluginOptions ?? {};
-
-  // We override the DEFAULT_SCHEMA_RESOURCE and NOT add a new locale as the locale from the 'sanity-plugin-ui-intl' is hardcoded to only use 'en,de,ru'
-  const mergedResources: Resources = {
-    en: {
-      schema: {
-        ...DEFAULT_SCHEMA_TRANSLATIONS,
-        ...translationSchema,
-      },
-    },
-  };
-
-  // Pass the merged resources to get the actual translation function to start translating texts
-  const translationFunction = translate({ customResources: mergedResources });
-  const t = translationFunction({ namespace: 'schema' });
+  const { isImageRequired } = pluginOptions ?? {};
 
   return defineType({
-    name: 'media2', // TODO :Temporary, change to 'media' after
-    title: 'Media',
+    name: 'mediaVideo',
+    title: 'Media Video',
     type: 'object',
     fields: [
       defineField({
         name: 'image',
-        title: t('image.title'),
-        description: t('image.description'),
         type: 'image',
         options: {
           collapsible: false,
@@ -40,44 +25,72 @@ const mediaObject = (pluginOptions: void | MediaVideoPluginOptions) => {
         fields: [
           defineField({
             name: 'altText',
-            title: t('image.altText.title'),
-            description: t('image.altText.description'),
             type: 'string',
+            components: {
+              field: (props) =>
+                MediaVideoI18nFieldInput({
+                  fieldProps: props,
+                  translationKeys: {
+                    title: 'image.altText.title',
+                    description: 'image.altText.description',
+                  },
+                }),
+            },
           }),
         ],
         validation: (Rule) =>
           Rule.custom((fieldValue, context) => {
             const parent = context.parent as { [key: string]: unknown } | null;
 
+            // To access this, must prefix first with 'schema', e.g. t('schema:image.required.title')
+            // Reference: https://www.sanity.io/docs/internationalizing-plugins-ui#97f12e11fd10
+            const t = context.i18n.t;
+
             if (isImageRequired && !fieldValue) {
-              return t('image.required.title');
+              return t('schema:image.required.title');
             }
 
             // Validate required if enableVideo is true, since we use this as the base thumbnail for the video to help with ssr
             if (!fieldValue && parent?.enableVideo) {
-              return t('image.required.title');
+              return t('schema:image.required.title');
             }
 
             return true;
           }),
+        components: {
+          field: (props) =>
+            MediaVideoI18nFieldInput({
+              fieldProps: props,
+              translationKeys: {
+                title: 'image.title',
+                description: 'image.description',
+              },
+            }),
+        },
       }),
       defineField({
         name: 'enableVideo',
-        title: t('enableVideo.title'),
-        description: t('enableVideo.description'),
+        description: 'Desc',
         type: 'boolean',
         initialValue: false,
+        components: {
+          input: (props) => {
+            return MediaVideoI18nBooleanInput({
+              fieldProps: props,
+              translationKeys: {
+                title: 'enableVideo.title',
+                description: 'enableVideo.description',
+              },
+            });
+          },
+        },
       }),
       defineField({
         name: 'videoType',
-        title: t('videoType.title'),
         type: 'string',
         options: {
           list: [
-            {
-              value: 'link',
-              title: t('videoType.link.title'),
-            },
+            { value: 'link', title: 'Link' },
             { value: 'mux', title: 'Mux' },
           ],
           layout: 'radio',
@@ -88,34 +101,67 @@ const mediaObject = (pluginOptions: void | MediaVideoPluginOptions) => {
         validation: (Rule) => [
           Rule.custom((fieldValue, context) => {
             const parent = context.parent as { [key: string]: unknown } | null;
+            const t = context.i18n.t;
 
             // Validate required if enableVideo is true
             if (parent?.enableVideo && !fieldValue) {
-              return t('videoType.required.title');
+              return t('schema:videoType.required.title');
             }
+
             return true;
           }),
         ],
+        components: {
+          field: (props) =>
+            MediaVideoI18nFieldInput({
+              fieldProps: props,
+              translationKeys: {
+                title: 'videoType.title',
+              },
+            }),
+          input: (props) =>
+            MediaVideoI18nStringListInput({
+              fieldProps: props,
+              translationKeys: {
+                list: ['videoType.link.title', 'videoType.mux.title'],
+              },
+            }),
+        },
       }),
       defineField({
         name: 'isAutoPlay',
-        title: t('isAutoPlay.title'),
-        description: t('isAutoPlay.description'),
         type: 'boolean',
         initialValue: false,
         hidden: ({ parent }) => !parent?.enableVideo,
+        components: {
+          input: (props) =>
+            MediaVideoI18nBooleanInput({
+              fieldProps: props,
+              translationKeys: {
+                title: 'isAutoPlay.title',
+                description: 'isAutoPlay.description',
+              },
+            }),
+        },
       }),
       defineField({
         name: 'isPipAutomatic',
-        title: t('isPipAutomatic.title'),
-        description: t('isPipAutomatic.description'),
         type: 'boolean',
         initialValue: false,
         hidden: ({ parent }) => !parent?.enableVideo || !parent?.isAutoPlay,
+        components: {
+          input: (props) =>
+            MediaVideoI18nBooleanInput({
+              fieldProps: props,
+              translationKeys: {
+                title: 'isPipAutomatic.title',
+                description: 'isPipAutomatic.description',
+              },
+            }),
+        },
       }),
       defineField({
         name: 'videoUrl',
-        title: t('videoUrl.title'),
         type: 'url',
         hidden: ({ parent }) => {
           if (!parent?.enableVideo) {
@@ -130,6 +176,7 @@ const mediaObject = (pluginOptions: void | MediaVideoPluginOptions) => {
         validation: (Rule) => [
           Rule.custom((fieldValue, context) => {
             const parent = context.parent as { [key: string]: unknown } | null;
+            const t = context.i18n.t;
 
             // Validate required if enableVideo is true
             if (
@@ -137,7 +184,7 @@ const mediaObject = (pluginOptions: void | MediaVideoPluginOptions) => {
               !fieldValue &&
               parent.videoType === 'link'
             ) {
-              return t('videoUrl.required.title');
+              return t('schema:videoUrl.required.title');
             }
 
             return true;
@@ -146,11 +193,17 @@ const mediaObject = (pluginOptions: void | MediaVideoPluginOptions) => {
         ],
         components: {
           input: VideoInputField,
+          field: (props) =>
+            MediaVideoI18nFieldInput({
+              fieldProps: props,
+              translationKeys: {
+                title: 'videoUrl.title',
+              },
+            }),
         },
       }),
       defineField({
         name: 'muxVideo',
-        title: t('muxVideo.title'),
         type: 'mux.video',
         options: { collapsible: false, collapsed: false },
         hidden: ({ parent }) => {
@@ -166,17 +219,28 @@ const mediaObject = (pluginOptions: void | MediaVideoPluginOptions) => {
         validation: (Rule) => [
           Rule.custom((fieldValue, context) => {
             const parent = context.parent as { [key: string]: unknown } | null;
+            const t = context.i18n.t;
 
             if (
               parent?.enableVideo &&
               !fieldValue &&
               parent.videoType === 'mux'
             ) {
-              return t('muxVideo.required.title');
+              return t('schema:muxVideo.required.title');
             }
+
             return true;
           }),
         ],
+        components: {
+          field: (props) =>
+            MediaVideoI18nFieldInput({
+              fieldProps: props,
+              translationKeys: {
+                title: 'muxVideo.title',
+              },
+            }),
+        },
       }),
     ],
   });

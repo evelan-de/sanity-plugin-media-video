@@ -2,7 +2,10 @@ import { definePlugin } from 'sanity';
 
 import mediaObject from '../schemas/objects/MediaObject';
 import { MediaVideoPluginOptions } from '../types/MediaVideoPluginOptions';
-// import { DEFAULT_RESOURCE_BUNDLE_EN } from '../utils/i18n/resourceBundles';
+import {
+  DEFAULT_RESOURCE_BUNDLE_DE,
+  DEFAULT_RESOURCE_BUNDLE_EN,
+} from '../utils/i18n/resourceBundles';
 
 export const mediaVideoPlugin = definePlugin<void | MediaVideoPluginOptions>(
   (config) => {
@@ -11,9 +14,9 @@ export const mediaVideoPlugin = definePlugin<void | MediaVideoPluginOptions>(
       schema: {
         types: [mediaObject(config)],
       },
-      // i18n: {
-      //   bundles: [DEFAULT_RESOURCE_BUNDLE_EN],
-      // },
+      i18n: {
+        bundles: [DEFAULT_RESOURCE_BUNDLE_EN, DEFAULT_RESOURCE_BUNDLE_DE],
+      },
     };
   },
 );

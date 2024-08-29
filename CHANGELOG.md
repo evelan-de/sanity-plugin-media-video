@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.2](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.0.1...v1.0.2) (2024-08-29)
+
+### Bug Fixes
+
+- package-lock.json error issue ([55c37a6](https://github.com/evelan-de/sanity-plugin-media-video/commit/55c37a645a8d939ebae1fc5357889bf41b2b44a1))
+- remove packages that are already accessible due to dependencies ([f2d84b1](https://github.com/evelan-de/sanity-plugin-media-video/commit/f2d84b1a0eedc8d426df3c6557d926a7a7d90739))
+
 ## [1.0.1](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.0.0...v1.0.1) (2024-08-29)
 
 ### Bug Fixes

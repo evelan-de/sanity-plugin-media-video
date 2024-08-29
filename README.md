@@ -59,7 +59,7 @@ export default defineConfig({
 });
 ```
 
-The plugin adds a new object type called `mediaVideo`. Simply add it as a `type` to one of your defined fields like so
+The plugin adds a new object type called `media`. Simply add it as a `type` to one of your defined fields like so
 
 ```ts
 export default defineType({
@@ -71,7 +71,7 @@ export default defineType({
     defineField({
       name: 'my-custom-media-field',
       title: 'My Custom Media Field',
-      type: 'mediaVideo',
+      type: 'media',
     }),
     // ...your-other-fields
   ],
@@ -162,7 +162,7 @@ export default defineConfig({
 
 ## 🎬 How to render the media video on your website
 
-This plugin gives out a ready out of the box made component for rendering the media video on your website with built-in functionalities such as auto-play, custom PiP on scroll, etc. One way to render it is to use the provided renderer component or you can implement your own renderer component with the data that you get from the `mediaVideo` object.
+This plugin gives out a ready out of the box made component for rendering the media video on your website with built-in functionalities such as auto-play, custom PiP on scroll, etc. One way to render it is to use the provided renderer component or you can implement your own renderer component with the data that you get from the `media` object.
 
 ### NOTE
 
@@ -283,7 +283,7 @@ const MyCustomComponent = (props) => {
 
 ```ts
 {
-  _type: 'mediaVideo';
+  _type: 'media';
   enableVideo: boolean;
   isAutoPlay: boolean;
   videoType: 'link' | 'mux';
@@ -330,8 +330,8 @@ You can query the data model with this sample groq query
 
 ```groq
 // Example for fetching data above
-*[ _type == "exampleSchemaWithMediaVideo" ] {
-  myMediaVideoField {
+*[ _type == "exampleSchemaWithMedia" ] {
+  myMediaField {
     image {
       asset->{
         _id,
@@ -370,7 +370,7 @@ You can query the data model with this sample groq query
 
   - You can refer to the [🌐 Localization](#-localization) section on how to override or add a new language
 
-- **Why the need to add an image field to the `mediaVideo` object?**
+- **Why the need to add an image field to the `media` object?**
   - The image field is used to display a custom preview image of the video. This is useful for SSR performance and SEO purposes as it does not load the video itself directly when the page is rendered.
   - This also makes it possible to just be a Media Picture instead if you do not want to use the video feature. With that you can then render it however you want with the image data
 

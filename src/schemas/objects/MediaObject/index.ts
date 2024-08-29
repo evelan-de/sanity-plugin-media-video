@@ -10,8 +10,8 @@ const mediaObject = (pluginOptions: void | MediaVideoPluginOptions) => {
   const { isImageRequired } = pluginOptions ?? {};
 
   return defineType({
-    name: 'mediaVideo',
-    title: 'Media Video',
+    name: 'media',
+    title: 'Media',
     type: 'object',
     fields: [
       defineField({

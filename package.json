@@ -142,5 +142,8 @@
   "browserslist": "extends @sanity/browserslist-config",
   "engines": {
     "node": ">=18"
+  },
+  "overrides": {
+    "conventional-changelog-conventionalcommits": ">= 8.0.0"
   }
 }

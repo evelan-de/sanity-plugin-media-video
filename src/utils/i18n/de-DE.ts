@@ -21,6 +21,5 @@ export const DEFAULT_DE_SCHEMA_TRANSLATIONS = removeUndefinedLocaleResources({
     'Dies erstellt automatisch einen kleinen schwebenden Videoplayer, wenn Sie am Hauptvideo vorbeiscrollen',
   'videoUrl.title': 'Videolink',
   'videoUrl.required.title': 'Videolink ist erforderlich',
-  'muxVideo.title': 'Mux-Video',
   'muxVideo.required.title': 'Mux-Video ist erforderlich',
 });

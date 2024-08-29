@@ -37,7 +37,7 @@ const sanityImage = z.object({
     .nullable(),
 });
 
-export const sanityImageWithAlt = z
+const sanityImageWithAlt = z
   .object({
     altText: z.string().optional(),
   })
@@ -109,3 +109,15 @@ const muxVideoSchema = z.object({
 export type MuxVideoType = z.infer<typeof muxVideoSchema>;
 
 // #endregion
+
+export const mediaVideoSchema = z.object({
+  image: sanityImageWithAlt.optional().nullable(),
+  enableVideo: z.boolean().optional().nullable(),
+  videoType: videoTypeEnum.optional().nullable(),
+  isAutoPlay: z.boolean().optional().nullable(),
+  isPipAutomatic: z.boolean().optional().nullable(),
+  videoUrl: z.string().url().optional().nullable(),
+  muxVideo: muxVideoSchema.optional().nullable(),
+});
+
+export type MediaVideoType = z.infer<typeof mediaVideoSchema>;

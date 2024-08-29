@@ -136,7 +136,8 @@
   },
   "peerDependencies": {
     "react": "^18",
-    "sanity": "^3"
+    "sanity": "^3",
+    "sanity-plugin-mux-input": "^2.3.6"
   },
   "browserslist": "extends @sanity/browserslist-config",
   "engines": {

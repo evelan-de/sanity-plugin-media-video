@@ -204,6 +204,8 @@ const mediaObject = (pluginOptions: void | MediaVideoPluginOptions) => {
       }),
       defineField({
         name: 'muxVideo',
+        // We just specify the title here instead of adding the custom translation component since adding the customn translation component overrides the custom implementation from the muxInput plugin
+        title: 'Mux',
         type: 'mux.video',
         options: { collapsible: false, collapsed: false },
         hidden: ({ parent }) => {
@@ -232,15 +234,6 @@ const mediaObject = (pluginOptions: void | MediaVideoPluginOptions) => {
             return true;
           }),
         ],
-        components: {
-          field: (props) =>
-            MediaVideoI18nFieldInput({
-              fieldProps: props,
-              translationKeys: {
-                title: 'muxVideo.title',
-              },
-            }),
-        },
       }),
     ],
   });

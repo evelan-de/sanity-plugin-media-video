@@ -20,6 +20,5 @@ export const DEFAULT_EN_SCHEMA_TRANSLATIONS = removeUndefinedLocaleResources({
     'This automatically creates a small floating video player when you scroll past the main video',
   'videoUrl.title': 'Video Link',
   'videoUrl.required.title': 'Video Link is required',
-  'muxVideo.title': 'Mux Video',
   'muxVideo.required.title': 'Mux Video is required',
 });

@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { BooleanInputProps, useTranslation } from 'sanity';
 
+import { I18N_NAMESPACE } from '../../utils/constants';
 import { ResourcesKeys } from '../../utils/i18n/resourceBundles';
 
 type MediaVideoI18nBooleanInputProps = {
@@ -42,7 +43,7 @@ const MediaVideoI18nBooleanInput: FC<MediaVideoI18nBooleanInputProps> = ({
   fieldProps,
   translationKeys,
 }) => {
-  const { t } = useTranslation('schema');
+  const { t } = useTranslation(I18N_NAMESPACE);
 
   const { title, description } = translationKeys;
   const fieldTitle = t(title);

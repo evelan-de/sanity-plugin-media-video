@@ -5,6 +5,7 @@ import MediaVideoI18nFieldInput from '../../../components/sanity/MediaVideoI18nF
 import MediaVideoI18nStringListInput from '../../../components/sanity/MediaVideoI18nStringListInput';
 import VideoInputField from '../../../components/sanity/VideoInputField';
 import { MediaVideoPluginOptions } from '../../../types/MediaVideoPluginOptions';
+import { I18N_NAMESPACE } from '../../../utils/constants';
 
 const mediaObject = (pluginOptions: void | MediaVideoPluginOptions) => {
   const { isImageRequired } = pluginOptions ?? {};
@@ -42,17 +43,17 @@ const mediaObject = (pluginOptions: void | MediaVideoPluginOptions) => {
           Rule.custom((fieldValue, context) => {
             const parent = context.parent as { [key: string]: unknown } | null;
 
-            // To access this, must prefix first with 'schema', e.g. t('schema:image.required.title')
+            // To access this, must prefix first with 'mediaVideo', e.g. t('mediaVideo:image.required.title')
             // Reference: https://www.sanity.io/docs/internationalizing-plugins-ui#97f12e11fd10
             const t = context.i18n.t;
 
             if (isImageRequired && !fieldValue) {
-              return t('schema:image.required.title');
+              return t(`${I18N_NAMESPACE}:image.required.title`);
             }
 
             // Validate required if enableVideo is true, since we use this as the base thumbnail for the video to help with ssr
             if (!fieldValue && parent?.enableVideo) {
-              return t('schema:image.required.title');
+              return t(`${I18N_NAMESPACE}:image.required.title`);
             }
 
             return true;
@@ -105,7 +106,7 @@ const mediaObject = (pluginOptions: void | MediaVideoPluginOptions) => {
 
             // Validate required if enableVideo is true
             if (parent?.enableVideo && !fieldValue) {
-              return t('schema:videoType.required.title');
+              return t(`${I18N_NAMESPACE}:videoType.required.title`);
             }
 
             return true;
@@ -184,7 +185,7 @@ const mediaObject = (pluginOptions: void | MediaVideoPluginOptions) => {
               !fieldValue &&
               parent.videoType === 'link'
             ) {
-              return t('schema:videoUrl.required.title');
+              return t(`${I18N_NAMESPACE}:videoUrl.required.title`);
             }
 
             return true;
@@ -228,7 +229,7 @@ const mediaObject = (pluginOptions: void | MediaVideoPluginOptions) => {
               !fieldValue &&
               parent.videoType === 'mux'
             ) {
-              return t('schema:muxVideo.required.title');
+              return t(`${I18N_NAMESPACE}:muxVideo.required.title`);
             }
 
             return true;

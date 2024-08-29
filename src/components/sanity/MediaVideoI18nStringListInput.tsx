@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { StringInputProps, TitledListValue, useTranslation } from 'sanity';
 
+import { I18N_NAMESPACE } from '../../utils/constants';
 import { ResourcesKeys } from '../../utils/i18n/resourceBundles';
 
 type MediaVideoI18nStringListInputProps = {
@@ -40,7 +41,7 @@ const MediaVideoI18nStringListInput: FC<MediaVideoI18nStringListInputProps> = ({
   fieldProps,
   translationKeys,
 }) => {
-  const { t } = useTranslation('schema');
+  const { t } = useTranslation(I18N_NAMESPACE);
 
   const { list } = translationKeys;
   const optionsList = fieldProps.schemaType.options

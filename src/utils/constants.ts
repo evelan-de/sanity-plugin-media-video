@@ -1,1 +1,1 @@
-export const I18N_NAMESPACE = 'schema';
+export const I18N_NAMESPACE = 'mediaVideo';

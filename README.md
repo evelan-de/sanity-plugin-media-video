@@ -78,6 +78,12 @@ export default defineType({
 });
 ```
 
+**Structure would look something like this:**
+<p align="center">
+  <img width="60%" src="docs/images/media-video-schema-1.png" alt="JSON dialog"/>
+  <img width="60%" src="docs/images/media-video-schema-2.png" alt="JSON dialog"/>
+</p>
+
 <br /><br />
 
 ## ⚙️ Plugin Configuration

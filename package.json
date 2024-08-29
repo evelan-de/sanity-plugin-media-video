@@ -97,7 +97,6 @@
     "react-intersection-observer": "9.13.0",
     "react-player": "2.16.0",
     "sanity-image": "0.1.9",
-    "sanity-plugin-ui-intl": "1.1.0",
     "tailwind-merge": "2.5.2",
     "tailwindcss-animate": "1.0.7",
     "zod": "3.23.8"

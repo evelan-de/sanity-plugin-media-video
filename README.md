@@ -25,10 +25,10 @@ A Sanity plugin for adding a media object (Image/Video) to your sanity studio sc
 
 ## 🔌 Installation
 
-Install `sanity-plugin-mux-input` as well since this uses Mux as part of the video encoding service.
+Install peer dependencies such as `zod` and `sanity-plugin-mux-input` as well since this uses Mux as part of the video encoding service.
 
 ```sh
-npm install sanity-plugin-media-video sanity-plugin-mux-input
+npm install sanity-plugin-media-video sanity-plugin-mux-input zod
 ```
 
 ## 🧑‍💻 Usage

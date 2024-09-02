@@ -16,6 +16,7 @@ A Sanity plugin for adding a media object (Image/Video) to your sanity studio sc
     - [Props](#props)
     - [Custom class names](#custom-class-names)
     - [Use your own implementation](#use-your-own-implementation)
+      - [Using the provided Hooks](#using-the-provided-hooks)
   - [🗃️ Data model](#️-data-model)
   - [🛢 GROQ Query](#-groq-query)
   - [❓ FAQs](#-faqs)
@@ -280,6 +281,58 @@ const MyCustomComponent = (props) => {
       </MediaVideoComponents.MediaVideoContainer>
     </MediaVideoComponents.MediaVideoRoot>
   );
+};
+```
+
+#### Using the provided Hooks
+You can also use the hooks provided by the plugin to help you build your own implementation:
+```tsx
+import { MediaVideoComponents } from 'sanity-plugin-media-video/renderer';
+
+const MyCustomComponent = (props) => {
+  const isDesktop = useMediaQuery('(min-width: 1024px)');
+  const pipUniqueId = uuidv4();
+
+  // Setup Intersection Observer to determine when the component is in view
+  const intersectionObserver = useInView({
+    rootMargin: '0px',
+    threshold: [0, 0.5, 1],
+  });
+  const { ref: topLevelRef } = intersectionObserver;
+
+  // Custom hook to manage video playback state and related events
+  const {
+    desktopPopoutPlay,
+    inlinePlay,
+    inlinePause,
+    showImage,
+    playedByAutoPlay,
+    isPopoutOpen,
+    isFloatingPip,
+    setInlinePause,
+    handleOnVideoProgress,
+    handleClickPlay,
+    handleVideoOnReady,
+    handleInlineOnPlay,
+    handleOnPipForceClose,
+    setActivePip,
+  } = useMediaVideoPlayback({
+    /** 
+     * The following props are required for the hook to work
+     * can refer to the implementation in the MediaVideo component
+     * for more details
+    */
+    isAutoPlay,
+    isPipAutomatic,
+    intersectionObserver,
+    pipUniqueId,
+    isDesktop,
+    playInPopout,
+  });
+
+  return (
+    {/* Your own implementation */}
+  )
 };
 ```
 

@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.4](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.0.3...v1.0.4) (2024-09-03)
+
+### Bug Fixes
+
+- weird transition on image after lazy loading ([52f63e5](https://github.com/evelan-de/sanity-plugin-media-video/commit/52f63e5b57d3049636ce1a27550e6924085fb427))
+
 ## [1.0.3](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.0.2...v1.0.3) (2024-08-30)
 
 ### Bug Fixes

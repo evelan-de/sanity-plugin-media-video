@@ -310,7 +310,7 @@ const MediaVideo = React.forwardRef<
                   <MediaVideoImage
                     imagePreview={imagePreview}
                     imageClassName={cn(
-                      'opacity-100 transition-all duration-200',
+                      'opacity-100 transition-opacity duration-200',
                       playedByAutoPlay && !showImage ? 'opacity-0' : '',
                       imageCn,
                     )}

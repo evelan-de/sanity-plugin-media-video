@@ -64,7 +64,7 @@ const MediaVideoImageContainer = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      'group/videoImage relative h-full w-full cursor-pointer opacity-100 transition-all duration-300',
+      'group/videoImage relative h-full w-full cursor-pointer opacity-100 transition-opacity duration-300',
       className,
     )}
     {...props}

@@ -290,7 +290,7 @@ You can also use the hooks provided by the plugin to help you build your own imp
 import { MediaVideoComponents } from 'sanity-plugin-media-video/renderer';
 
 const MyCustomComponent = (props) => {
-  const isDesktop = useMediaQuery('(min-width: 1024px)');
+  const isDesktop = useMediaQuery('(min-width: 1024px)'); // Used to know if the screen is desktop or not
   const pipUniqueId = uuidv4();
 
   // Setup Intersection Observer to determine when the component is in view

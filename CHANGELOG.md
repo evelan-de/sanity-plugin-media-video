@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.0](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.0.4...v1.1.0) (2024-10-02)
+
+### Features
+
+- add custom video hook callback props to media playback hook ([879b82f](https://github.com/evelan-de/sanity-plugin-media-video/commit/879b82fc717ec28d3b488e0b046015b485fc9329))
+
 ## [1.0.4](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.0.3...v1.0.4) (2024-09-03)
 
 ### Bug Fixes

@@ -14,6 +14,7 @@ A Sanity plugin for adding a media object (Image/Video) to your sanity studio sc
   - [🎬 How to render the media video on your website](#-how-to-render-the-media-video-on-your-website)
     - [NOTE](#note)
     - [Props](#props)
+    - [videoHookCallbacks object](#videohookcallbacks-object)
     - [Custom class names](#custom-class-names)
     - [Use your own implementation](#use-your-own-implementation)
       - [Using the provided Hooks](#using-the-provided-hooks)
@@ -80,6 +81,7 @@ export default defineType({
 ```
 
 **Structure would look something like this:**
+
 <p align="center">
   <img width="60%" src="docs/images/media-video-schema-1.png" alt="JSON dialog"/>
   <img width="60%" src="docs/images/media-video-schema-2.png" alt="JSON dialog"/>
@@ -240,8 +242,19 @@ const MyComponent = (props) => {
 | `autoPlayVideoPlayerProps` | Props to be passed to the Auto Play Video Background ReactPlayer instance for advanced video player customization.        | `undefined` | No       |
 | `videoPlayerProps`         | Props to be passed to the ReactPlayer instance for advanced video player customization.                                   | `undefined` | No       |
 | `isDesktopScreen`          | Whether the current screen is in a desktop size. Useful for determining if to play in the popout mode or not.             | `undefined` | No       |
+| `videoHookCallbacks`       | Object of callback functions for handling video playback events (onPlay, onPause, etc.) within the custom hook.           | `undefined` | No       |
 | `classNames`               | Custom class names for various UI elements to facilitate styling and theming.                                             | `undefined` | No       |
 | `ref`                      | Forwarded ref to the root div element of the component.                                                                   | `undefined` | No       |
+
+### videoHookCallbacks object
+
+| Prop           | Description                                                                                                                        |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `onPlay`       | Custom callback that triggers whenever the video playback starts, useful for handling side effects.                                |
+| `onPause`      | Custom callback that triggers when the video is paused, allowing for additional logic like UI updates or tracking.                 |
+| `onReady`      | Custom callback that is executed once the video is ready to be played, useful for preloading or initialization tasks.              |
+| `onPipEnable`  | Custom callback triggered when Picture-in-Picture (PiP) mode is activated, allowing custom behavior when PiP is enabled.           |
+| `onPipDisable` | Custom callback triggered when Picture-in-Picture (PiP) mode is deactivated, useful for handling any teardown logic or UI updates. |
 
 ### Custom class names
 
@@ -285,7 +298,9 @@ const MyCustomComponent = (props) => {
 ```
 
 #### Using the provided Hooks
+
 You can also use the hooks provided by the plugin to help you build your own implementation:
+
 ```tsx
 import { MediaVideoComponents } from 'sanity-plugin-media-video/renderer';
 
@@ -317,11 +332,11 @@ const MyCustomComponent = (props) => {
     handleOnPipForceClose,
     setActivePip,
   } = useMediaVideoPlayback({
-    /** 
+    /**
      * The following props are required for the hook to work
      * can refer to the implementation in the MediaVideo component
      * for more details
-    */
+     */
     isAutoPlay,
     isPipAutomatic,
     intersectionObserver,
@@ -330,9 +345,9 @@ const MyCustomComponent = (props) => {
     playInPopout,
   });
 
-  return (
-    {/* Your own implementation */}
-  )
+  return {
+    /* Your own implementation */
+  };
 };
 ```
 

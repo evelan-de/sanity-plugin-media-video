@@ -46,6 +46,7 @@ import { useMediaVideoPlayback } from './useMediaVideoPlayback';
  * @param autoPlayVideoPlayerProps - Props to be passed to the Auto Play Video Background ReactPlayer instance for advanced video player customization.
  * @param videoPlayerProps - Props to be passed to the ReactPlayer instance for advanced video player customization.
  * @param isDesktopScreen - Whether the current screen is in a desktop size. Useful for determining if to play in the popout mode or not.
+ * @param videoHookCallbacks - Object of callback functions for handling video playback events (onPlay, onPause, etc.) within the custom hook.
  * @param classNames - Custom class names for various UI elements to facilitate styling and theming.
  * @param classNames.containerCn - Class name for the main container.
  * @param classNames.imageContainerCn - Class name for the image container.
@@ -80,6 +81,13 @@ const MediaVideo = React.forwardRef<
     autoPlayVideoPlayerProps?: ReactPlayerProps;
     videoPlayerProps?: ReactPlayerProps;
     isDesktopScreen?: boolean;
+    videoHookCallbacks?: {
+      onPlay?: () => void;
+      onPause?: () => void;
+      onReady?: () => void;
+      onPipEnable?: () => void;
+      onPipDisable?: () => void;
+    };
     classNames?: {
       containerCn?: string;
       imageContainerCn?: string;
@@ -111,6 +119,7 @@ const MediaVideo = React.forwardRef<
       autoPlayVideoPlayerProps,
       videoPlayerProps,
       isDesktopScreen,
+      videoHookCallbacks,
       classNames,
       ...props
     },
@@ -185,6 +194,11 @@ const MediaVideo = React.forwardRef<
       pipUniqueId,
       isDesktop,
       playInPopout,
+      onPause: videoHookCallbacks?.onPause,
+      onPlay: videoHookCallbacks?.onPlay,
+      onReady: videoHookCallbacks?.onReady,
+      onPipEnable: videoHookCallbacks?.onPipEnable,
+      onPipDisable: videoHookCallbacks?.onPipDisable,
     });
 
     // Prepare shared properties for the video player component

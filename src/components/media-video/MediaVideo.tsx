@@ -256,7 +256,8 @@ const MediaVideo = React.forwardRef<
                 isFloatingPip
                   ? [
                       '!fixed bottom-6 right-6 z-[999]',
-                      'h-auto w-[17.1875rem] lg:h-[12.5rem] lg:w-[21.875rem] xl:h-[15.625rem] xl:w-[25rem]',
+                      'w-[17.1875rem] lg:h-[12.5rem] lg:w-[21.875rem] xl:h-[15.625rem] xl:w-[25rem]',
+                      'h-[10rem] lg:h-[12.5rem] xl:h-[15.625rem]',
                       'animate-videoSticky',
                     ]
                   : '!translate-x-0 !translate-y-0 animate-videoInline',

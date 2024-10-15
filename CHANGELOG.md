@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.1.0...v1.1.1) (2024-10-15)
+
+### Bug Fixes
+
+- border radius and play button placement for older ios devices ([ff62b77](https://github.com/evelan-de/sanity-plugin-media-video/commit/ff62b77b96f5c72c37ef5b6b3cb71d890dbf6836))
+
 ## [1.1.0](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.0.4...v1.1.0) (2024-10-02)
 
 ### Features

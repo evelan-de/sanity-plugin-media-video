@@ -138,7 +138,8 @@ const MediaVideoPlayButtonContainer = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      'absolute inset-0 flex items-center justify-center',
+      // We don't use inset-0 because of incompatibility on older ios devices with inset style
+      'absolute top-0 right-0 left-0 bottom-0 flex items-center justify-center',
       className,
     )}
     {...props}
@@ -194,7 +195,7 @@ const MediaVideoPlayer = ({
 }: MediaVideoPlayerProps) => {
   return (
     <Player
-      className={cn('overflow-hidden', className)}
+      className={cn('overflow-hidden [clip-path:content-box]', className)}
       width='100%'
       height='100%'
       pip
@@ -285,7 +286,10 @@ const MediaVideoAutoPlayVideoLink = ({
       muted
       pip={false}
       {...videoPlayerProps}
-      className={cn('[&>video]:object-cover', className)}
+      className={cn(
+        '[&>video]:object-cover [clip-path:content-box]',
+        className,
+      )}
       config={{
         youtube: {
           playerVars: {

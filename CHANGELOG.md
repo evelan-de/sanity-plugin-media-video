@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.1.1...v1.1.2) (2024-10-15)
+
+### Bug Fixes
+
+- use specific number value for height to fix border radius ([7455494](https://github.com/evelan-de/sanity-plugin-media-video/commit/7455494052b74ddf8a0dcb4cd7e5e6df0e6ba3a2))
+
 ## [1.1.1](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.1.0...v1.1.1) (2024-10-15)
 
 ### Bug Fixes

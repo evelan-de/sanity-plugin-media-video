@@ -25,9 +25,17 @@ const VideoInputField: FC<StringInputProps> = (props: StringInputProps) => {
 
       {value && (
         /* Player ratio: 100 / (1280 / 720) */
-        <div className='relative w-full pt-[56.25%]'>
+        <div
+          style={{ position: 'relative', width: '100%', paddingTop: '56.25%' }}
+        >
           <Player
-            className='absolute left-0 top-0 h-full w-full'
+            style={{
+              position: 'absolute',
+              left: 0,
+              top: 0,
+              height: '100%',
+              width: '100%',
+            }}
             width='100%'
             height='100%'
             controls

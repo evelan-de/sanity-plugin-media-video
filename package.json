@@ -19,6 +19,7 @@
   "author": "Evelan <kontakt@evelan.de>",
   "sideEffects": false,
   "type": "commonjs",
+  "style": "./dist/sanity-plugin-media-video.css",
   "exports": {
     ".": {
       "source": "./src/index.ts",
@@ -50,6 +51,11 @@
       "require": "./dist/contexts.js",
       "default": "./dist/contexts.js"
     },
+    "./sanity-plugin-media-video.module.css": {
+      "import": "./dist/sanity-plugin-media-video.module.css",
+      "require": "./dist/sanity-plugin-media-video.module.css",
+      "default": "./dist/sanity-plugin-media-video.module.css"
+    },
     "./package.json": "./package.json"
   },
   "main": "./dist/index.js",
@@ -72,6 +78,10 @@
   },
   "files": [
     "dist",
+    "dist/*.css",
+    "dist/*.module.css",
+    "*.css",
+    "*.module.css",
     "types.js",
     "renderer.js",
     "hooks.js",

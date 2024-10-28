@@ -48,6 +48,7 @@ import { useMediaVideoPlayback } from './useMediaVideoPlayback';
  * @param isDesktopScreen - Whether the current screen is in a desktop size. Useful for determining if to play in the popout mode or not.
  * @param videoHookCallbacks - Object of callback functions for handling video playback events (onPlay, onPause, etc.) within the custom hook.
  * @param classNames - Custom class names for various UI elements to facilitate styling and theming.
+ * @param classNames.rootCn - Class name for the root element.
  * @param classNames.containerCn - Class name for the main container.
  * @param classNames.imageContainerCn - Class name for the image container.
  * @param classNames.imageCn - Class name for the preview image.
@@ -89,6 +90,7 @@ const MediaVideo = React.forwardRef<
       onPipDisable?: () => void;
     };
     classNames?: {
+      rootCn?: string;
       containerCn?: string;
       imageContainerCn?: string;
       imageCn?: string;
@@ -126,6 +128,7 @@ const MediaVideo = React.forwardRef<
     ref,
   ) => {
     const {
+      rootCn,
       containerCn,
       imageContainerCn,
       imageCn,
@@ -208,18 +211,24 @@ const MediaVideo = React.forwardRef<
     };
 
     return (
-      <MediaVideoRoot ref={ref} className={cn(className)} {...props}>
+      <MediaVideoRoot
+        ref={ref}
+        className={cn('media-video-root', className, rootCn)}
+        {...props}
+      >
         <MediaVideoContainer
           ref={topLevelRef}
-          className={cn('h-full w-full', containerCn)}
+          className={cn('media-video-container', containerCn)}
         >
           {/* Auto play video */}
           {isAutoPlay && playedByAutoPlay && (
             <MediaVideoPlayerWrapper
               className={cn(
+                'media-video-auto-play-wrapper',
                 // Add opacity effect for seamless screen transitions
-                'transition-opacity duration-300',
-                inlinePlay ? 'opacity-0' : 'opacity-100',
+                // 'transition-opacity duration-300',
+                // inlinePlay ? 'opacity-0' : 'opacity-100',
+                inlinePlay ? 'media-video-auto-play-wrapper__opacity-0' : '',
                 videoBackgroundCn,
               )}
             >
@@ -243,7 +252,7 @@ const MediaVideo = React.forwardRef<
                     } as React.CSSProperties,
                     ...autoPlayVideoPlayerProps,
                   }}
-                  className={videoCn}
+                  className={cn('media-video-auto-play-player', videoCn)}
                 />
               )}
             </MediaVideoPlayerWrapper>
@@ -253,14 +262,18 @@ const MediaVideo = React.forwardRef<
           {inlinePlay && (
             <MediaVideoPlayerWrapper
               className={cn(
+                'media-video-inline-player-wrapper',
+                // isFloatingPip
+                //   ? [
+                //       '!fixed bottom-6 right-6 z-[999]',
+                //       'w-[17.1875rem] lg:h-[12.5rem] lg:w-[21.875rem] xl:h-[15.625rem] xl:w-[25rem]',
+                //       'h-[10rem] lg:h-[12.5rem] xl:h-[15.625rem]',
+                //       'animate-videoSticky',
+                //     ]
+                //   : '!translate-x-0 !translate-y-0 animate-videoInline',
                 isFloatingPip
-                  ? [
-                      '!fixed bottom-6 right-6 z-[999]',
-                      'w-[17.1875rem] lg:h-[12.5rem] lg:w-[21.875rem] xl:h-[15.625rem] xl:w-[25rem]',
-                      'h-[10rem] lg:h-[12.5rem] xl:h-[15.625rem]',
-                      'animate-videoSticky',
-                    ]
-                  : '!translate-x-0 !translate-y-0 animate-videoInline',
+                  ? 'is-floating-pip animate-sticky'
+                  : 'is-inline-player animate-inline',
                 inlineVideoBackgroundCn,
               )}
             >
@@ -279,7 +292,8 @@ const MediaVideo = React.forwardRef<
                 onEnablePIP={() => setActivePip(true)}
                 onDisablePIP={() => setActivePip(false)}
                 className={cn(
-                  '[&>video]:!object-cover',
+                  'media-video-inline-player',
+                  // '[&>video]:!object-cover',
                   reactVideoPlayerProps.className,
                 )}
                 {...videoPlayerProps}
@@ -297,12 +311,18 @@ const MediaVideo = React.forwardRef<
                 type='button'
                 onClick={handleOnPipForceClose}
                 className={cn(
-                  'absolute right-[.5rem] top-[.5rem] h-[1.5rem] w-[1.5rem] bg-black px-xs',
-                  !isFloatingPip ? 'hidden' : '',
+                  'media-video-inline-player-pip-close-button',
+                  // 'absolute right-[.5rem] top-[.5rem] h-[1.5rem] w-[1.5rem] bg-black px-xs',
+                  !isFloatingPip
+                    ? 'media-video-inline-player-pip-close-button__hidden'
+                    : '',
                 )}
                 title='Close Picture In Picture'
               >
-                <XIcon className='h-[1rem] w-[1rem]' />
+                <XIcon
+                  style={{ height: '1rem', width: '1rem' }}
+                  // className='h-[1rem] w-[1rem]'
+                />
                 <span className='sr-only'>Close Picture In Picture</span>
               </button>
             </MediaVideoPlayerWrapper>
@@ -315,31 +335,47 @@ const MediaVideo = React.forwardRef<
           >
             <DialogTitle className='sr-only' />
             {/* Displays the video thumbnail for both mobile/tablet and desktop */}
-            <DialogTrigger asChild className={dialogTriggerCn}>
+            <DialogTrigger
+              asChild
+              className={cn('media-video-dialog-trigger', dialogTriggerCn)}
+            >
               {imagePreview?.asset.url && (
                 <MediaVideoImageContainer
                   className={cn(
-                    inlinePlay ? 'pointer-events-none opacity-0' : '',
+                    'media-video-image-container',
+                    // inlinePlay ? 'pointer-events-none opacity-0' : '',
+                    inlinePlay ? 'media-video-image-container__opacity-0' : '',
                     imageContainerCn,
                   )}
                 >
                   <MediaVideoImage
+                    className={cn(
+                      'media-video-image',
+                      playedByAutoPlay && !showImage
+                        ? 'media-video-image__opacity-0'
+                        : '',
+                    )}
                     imagePreview={imagePreview}
                     imageClassName={cn(
-                      'opacity-100 transition-opacity duration-200',
-                      playedByAutoPlay && !showImage ? 'opacity-0' : '',
+                      // 'opacity-100 transition-opacity duration-200',
+                      // playedByAutoPlay && !showImage ? 'opacity-0' : '',
                       imageCn,
                     )}
                   />
 
                   {!isFloatingPip && (
                     <MediaVideoPlayButtonContainer
-                      className={cn(playBtnContainerCn)}
+                      className={cn(
+                        'media-video-play-button-container',
+                        playBtnContainerCn,
+                      )}
                     >
                       {playButton ? (
                         playButton
                       ) : (
-                        <MediaVideoPlayButton className={cn(playBtnCn)} />
+                        <MediaVideoPlayButton
+                          className={cn('media-video-play-button', playBtnCn)}
+                        />
                       )}
                     </MediaVideoPlayButtonContainer>
                   )}
@@ -351,11 +387,18 @@ const MediaVideo = React.forwardRef<
             {isDesktop && playInPopout && (
               <DialogContent
                 className={cn(
-                  'z-[99999] h-fit w-full max-w-[90vw] border-none p-0 lg:h-full lg:p-[1rem]',
+                  'media-video-dialog-content',
+                  // 'z-[99999] h-fit w-full max-w-[90vw] border-none p-0 lg:h-full lg:p-[1rem]',
                   dialogContentCn,
                 )}
-                dialogOverlayClassName={dialogOverlayCn}
-                dialogCloseClassName={dialogCloseCn}
+                dialogOverlayClassName={cn(
+                  'media-video-dialog-overlay',
+                  dialogOverlayCn,
+                )}
+                dialogCloseClassName={cn(
+                  'media-video-dialog-close',
+                  dialogCloseCn,
+                )}
               >
                 {isPopoutOpen && (
                   <MediaVideoPopout

@@ -1,6 +1,6 @@
 import { defineConfig } from '@sanity/pkg-utils';
 import postcss from 'rollup-plugin-postcss';
-import tailwindcss from 'tailwindcss';
+// import tailwindcss from 'tailwindcss';
 import autoprefixer from 'autoprefixer';
 import path from 'path';
 
@@ -8,14 +8,15 @@ export default defineConfig({
   dist: 'dist',
   tsconfig: 'tsconfig.dist.json',
 
-  // Add Rollup configuration with PostCSS and Tailwind
+  // Add Rollup configuration with PostCSS
   rollup: {
     plugins: [
       postcss({
-        extract: path.resolve('dist/sanity-plugin-media-video.module.css'),
+        extensions: ['.css', '.scss'],
+        extract: path.resolve('dist/sanity-plugin-media-video.css'),
         minimize: true, // Minify the CSS
         plugins: [
-          tailwindcss(),
+          // tailwindcss(),
           autoprefixer(), // Ensures CSS is compatible across different browsers
         ],
         autoModules: true, // Automatically import CSS modules

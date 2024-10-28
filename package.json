@@ -51,10 +51,10 @@
       "require": "./dist/contexts.js",
       "default": "./dist/contexts.js"
     },
-    "./sanity-plugin-media-video.module.css": {
-      "import": "./dist/sanity-plugin-media-video.module.css",
-      "require": "./dist/sanity-plugin-media-video.module.css",
-      "default": "./dist/sanity-plugin-media-video.module.css"
+    "./dist/sanity-plugin-media-video.css": {
+      "import": "./dist/sanity-plugin-media-video.css",
+      "require": "./dist/sanity-plugin-media-video.css",
+      "default": "./dist/sanity-plugin-media-video.css"
     },
     "./package.json": "./package.json"
   },
@@ -79,9 +79,6 @@
   "files": [
     "dist",
     "dist/*.css",
-    "dist/*.module.css",
-    "*.css",
-    "*.module.css",
     "types.js",
     "renderer.js",
     "hooks.js",
@@ -91,12 +88,13 @@
     "v2-incompatible.js"
   ],
   "scripts": {
-    "build": "plugin-kit verify-package --silent && pkg-utils build --strict --check --clean",
+    "build-css": "sass src/css/styles.scss:dist/sanity-plugin-media-video.css --style compressed",
+    "build": "plugin-kit verify-package --silent && pkg-utils build --strict --check --clean && npm run build-css",
     "format": "prettier --write --cache --ignore-unknown .",
-    "link-watch": "plugin-kit link-watch",
+    "link-watch": "npm run build-css && plugin-kit link-watch",
     "lint": "eslint .",
     "prepublishOnly": "npm run build",
-    "watch": "pkg-utils watch --strict",
+    "watch": "npm run build-css && pkg-utils watch --strict",
     "prepare": "husky"
   },
   "dependencies": {
@@ -111,7 +109,6 @@
   "devDependencies": {
     "@commitlint/cli": "19.5.0",
     "@commitlint/config-conventional": "19.5.0",
-    "@sanity/browserslist-config": "1.0.3",
     "@sanity/pkg-utils": "6.11.3",
     "@sanity/plugin-kit": "4.0.18",
     "@sanity/semantic-release-preset": "5.0.0",
@@ -119,6 +116,7 @@
     "@typescript-eslint/eslint-plugin": "6.7.5",
     "@typescript-eslint/parser": "6.7.5",
     "autoprefixer": "10.4.20",
+    "clsx": "2.1.1",
     "eslint": "8.57.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-config-sanity": "7.1.2",
@@ -137,6 +135,7 @@
     "react-dom": "18.3.1",
     "rollup-plugin-postcss": "4.0.2",
     "sanity": "3.61.0",
+    "sass": "1.80.4",
     "styled-components": "6.1.13",
     "tailwindcss": "3.4.14",
     "tailwindcss-animate": "1.0.7",
@@ -148,11 +147,16 @@
     "sanity-plugin-mux-input": "^2.3.6",
     "zod": "^3.23.8"
   },
-  "browserslist": "extends @sanity/browserslist-config",
   "engines": {
     "node": ">=18"
   },
   "overrides": {
     "conventional-changelog-conventionalcommits": ">= 8.0.0"
+  },
+  "sanityPlugin": {
+    "linkWatch": {
+      "command": "npm run build-css && npm run watch",
+      "extensions": "js,ts,tsx,png,svg,gif,jpeg,css,scss"
+    }
   }
 }

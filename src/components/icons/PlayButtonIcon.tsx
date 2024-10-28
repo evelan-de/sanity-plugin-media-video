@@ -1,7 +1,5 @@
 import React, { FC } from 'react';
 
-import { cn } from '../../utils/cvaUtils';
-
 const PlayButtonIcon: FC<React.SVGProps<SVGSVGElement>> = ({
   width,
   height,
@@ -13,7 +11,12 @@ const PlayButtonIcon: FC<React.SVGProps<SVGSVGElement>> = ({
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 24 24'
       fill='currentColor'
-      className={cn('size-6 fill-white', className)}
+      className={className}
+      style={{
+        height: height || '1.5rem',
+        width: width || '1.5rem',
+        fill: 'white',
+      }}
       {...restProps}
     >
       <path

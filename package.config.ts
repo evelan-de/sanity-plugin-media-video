@@ -1,6 +1,5 @@
 import { defineConfig } from '@sanity/pkg-utils';
 import postcss from 'rollup-plugin-postcss';
-// import tailwindcss from 'tailwindcss';
 import autoprefixer from 'autoprefixer';
 import path from 'path';
 
@@ -16,7 +15,6 @@ export default defineConfig({
         extract: path.resolve('dist/sanity-plugin-media-video.css'),
         minimize: true, // Minify the CSS
         plugins: [
-          // tailwindcss(),
           autoprefixer(), // Ensures CSS is compatible across different browsers
         ],
         autoModules: true, // Automatically import CSS modules

@@ -22,7 +22,8 @@ const DialogOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      'fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
+      // 'fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
+      'media-video-comp-dialog-overlay',
       className,
     )}
     {...props}
@@ -52,7 +53,8 @@ const DialogContent = React.forwardRef<
       <DialogPrimitive.Content
         ref={ref}
         className={cn(
-          'fixed left-[50%] top-[50%] z-50 grid w-full translate-x-[-50%] translate-y-[-50%] gap-4 border p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]',
+          // 'fixed left-[50%] top-[50%] z-50 grid w-full translate-x-[-50%] translate-y-[-50%] gap-4 border p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]',
+          'media-video-comp-dialog-content',
           className,
         )}
         {...props}
@@ -60,7 +62,8 @@ const DialogContent = React.forwardRef<
         {children}
         <DialogPrimitive.Close
           className={cn(
-            'ring-offset-background focus:ring-ring absolute right-8 top-8 opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-black data-[state=open]:text-white',
+            // 'absolute right-8 top-8 opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-black data-[state=open]:text-white',
+            'media-video-comp-dialog-close',
             dialogCloseClassName,
           )}
         >
@@ -68,7 +71,7 @@ const DialogContent = React.forwardRef<
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 16 16'
             fill='currentColor'
-            className='size-4 text-white'
+            className='media-video-comp-dialog-close-svg'
           >
             <path d='M5.28 4.22a.75.75 0 0 0-1.06 1.06L6.94 8l-2.72 2.72a.75.75 0 1 0 1.06 1.06L8 9.06l2.72 2.72a.75.75 0 1 0 1.06-1.06L9.06 8l2.72-2.72a.75.75 0 0 0-1.06-1.06L8 6.94 5.28 4.22Z' />
           </svg>
@@ -88,7 +91,8 @@ const DialogTitle = React.forwardRef<
   <DialogPrimitive.Title
     ref={ref}
     className={cn(
-      'text-lg font-semibold leading-none tracking-tight',
+      // 'text-lg font-semibold leading-none tracking-tight',
+      'media-video-comp-dialog-title',
       className,
     )}
     {...props}
@@ -102,7 +106,8 @@ const DialogDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={cn('text-gray-500 text-sm', className)}
+    // className={cn('text-gray-500 text-sm', className)}
+    className={cn('media-video-comp-dialog-description', className)}
     {...props}
   />
 ));

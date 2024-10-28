@@ -12,25 +12,6 @@
   }
 }
 
-// Keyframes for animations for PiP (Picture-in-picture mode)
-@keyframes videoInline {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes videoSticky {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 .media-video-inline-player-wrapper {
   // Common styling for the inline player wrapper
   &.is-floating-pip {
@@ -57,7 +38,7 @@
 
     // Sticky animation
     &.animate-sticky {
-      animation: videoSticky 300ms ease-in-out forwards;
+      animation: media-video-sticky 300ms ease-in-out forwards;
     }
   }
 
@@ -66,7 +47,7 @@
 
     // Inline animation
     &.animate-inline {
-      animation: videoInline 300ms ease-in-out forwards;
+      animation: media-video-inline 300ms ease-in-out forwards;
     }
   }
 

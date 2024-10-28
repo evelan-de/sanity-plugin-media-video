@@ -225,9 +225,6 @@ const MediaVideo = React.forwardRef<
             <MediaVideoPlayerWrapper
               className={cn(
                 'media-video-auto-play-wrapper',
-                // Add opacity effect for seamless screen transitions
-                // 'transition-opacity duration-300',
-                // inlinePlay ? 'opacity-0' : 'opacity-100',
                 inlinePlay ? 'media-video-auto-play-wrapper__opacity-0' : '',
                 videoBackgroundCn,
               )}
@@ -263,14 +260,6 @@ const MediaVideo = React.forwardRef<
             <MediaVideoPlayerWrapper
               className={cn(
                 'media-video-inline-player-wrapper',
-                // isFloatingPip
-                //   ? [
-                //       '!fixed bottom-6 right-6 z-[999]',
-                //       'w-[17.1875rem] lg:h-[12.5rem] lg:w-[21.875rem] xl:h-[15.625rem] xl:w-[25rem]',
-                //       'h-[10rem] lg:h-[12.5rem] xl:h-[15.625rem]',
-                //       'animate-videoSticky',
-                //     ]
-                //   : '!translate-x-0 !translate-y-0 animate-videoInline',
                 isFloatingPip
                   ? 'is-floating-pip animate-sticky'
                   : 'is-inline-player animate-inline',
@@ -293,7 +282,6 @@ const MediaVideo = React.forwardRef<
                 onDisablePIP={() => setActivePip(false)}
                 className={cn(
                   'media-video-inline-player',
-                  // '[&>video]:!object-cover',
                   reactVideoPlayerProps.className,
                 )}
                 {...videoPlayerProps}
@@ -312,17 +300,13 @@ const MediaVideo = React.forwardRef<
                 onClick={handleOnPipForceClose}
                 className={cn(
                   'media-video-inline-player-pip-close-button',
-                  // 'absolute right-[.5rem] top-[.5rem] h-[1.5rem] w-[1.5rem] bg-black px-xs',
                   !isFloatingPip
                     ? 'media-video-inline-player-pip-close-button__hidden'
                     : '',
                 )}
                 title='Close Picture In Picture'
               >
-                <XIcon
-                  style={{ height: '1rem', width: '1rem' }}
-                  // className='h-[1rem] w-[1rem]'
-                />
+                <XIcon style={{ height: '1rem', width: '1rem' }} />
                 <span className='sr-only'>Close Picture In Picture</span>
               </button>
             </MediaVideoPlayerWrapper>
@@ -343,7 +327,6 @@ const MediaVideo = React.forwardRef<
                 <MediaVideoImageContainer
                   className={cn(
                     'media-video-image-container',
-                    // inlinePlay ? 'pointer-events-none opacity-0' : '',
                     inlinePlay ? 'media-video-image-container__opacity-0' : '',
                     imageContainerCn,
                   )}
@@ -356,11 +339,7 @@ const MediaVideo = React.forwardRef<
                         : '',
                     )}
                     imagePreview={imagePreview}
-                    imageClassName={cn(
-                      // 'opacity-100 transition-opacity duration-200',
-                      // playedByAutoPlay && !showImage ? 'opacity-0' : '',
-                      imageCn,
-                    )}
+                    imageClassName={imageCn}
                   />
 
                   {!isFloatingPip && (
@@ -386,11 +365,7 @@ const MediaVideo = React.forwardRef<
             {/* Desktop video player in dialog popout */}
             {isDesktop && playInPopout && (
               <DialogContent
-                className={cn(
-                  'media-video-dialog-content',
-                  // 'z-[99999] h-fit w-full max-w-[90vw] border-none p-0 lg:h-full lg:p-[1rem]',
-                  dialogContentCn,
-                )}
+                className={cn('media-video-dialog-content', dialogContentCn)}
                 dialogOverlayClassName={cn(
                   'media-video-dialog-overlay',
                   dialogOverlayCn,

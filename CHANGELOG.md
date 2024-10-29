@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.1.2...v1.2.0) (2024-10-29)
+
+### Features
+
+- change to use css styling for dialog components ([5b4aedc](https://github.com/evelan-de/sanity-plugin-media-video/commit/5b4aedc67180122dedceb5d685526bf5711c9ca7))
+- change to use scss for styling ([adcbfda](https://github.com/evelan-de/sanity-plugin-media-video/commit/adcbfdac84aa6f911f75e41b14eddf08594d2d0f))
+
 ## [1.1.2](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.1.1...v1.1.2) (2024-10-15)
 
 ### Bug Fixes

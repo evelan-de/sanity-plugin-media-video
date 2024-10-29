@@ -15,7 +15,8 @@ A Sanity plugin for adding a media object (Image/Video) to your sanity studio sc
     - [NOTE](#note)
     - [Props](#props)
     - [videoHookCallbacks object](#videohookcallbacks-object)
-    - [Custom class names](#custom-class-names)
+    - [Custom class names and its corresponding CSS selectors](#custom-class-names-and-its-corresponding-css-selectors)
+    - [CSS Selectors for Media Video Components](#css-selectors-for-media-video-components)
     - [Use your own implementation](#use-your-own-implementation)
       - [Using the provided Hooks](#using-the-provided-hooks)
   - [🗃️ Data model](#️-data-model)
@@ -202,6 +203,7 @@ const MyComponent = (props) => {
     <MediaVideo
       className='my-custom-class-name'
       classNames={{
+        rootCn: 'my-custom-root-container-class-name',
         containerCn: 'my-custom-container-class-name',
         imageContainerCn: 'my-custom-image-container-class-name',
         imageCn: 'my-custom-image-class-name',
@@ -256,22 +258,38 @@ const MyComponent = (props) => {
 | `onPipEnable`  | Custom callback triggered when Picture-in-Picture (PiP) mode is activated, allowing custom behavior when PiP is enabled.           |
 | `onPipDisable` | Custom callback triggered when Picture-in-Picture (PiP) mode is deactivated, useful for handling any teardown logic or UI updates. |
 
-### Custom class names
+### Custom class names and its corresponding CSS selectors
 
-| Prop                                 | Description                                              |
-| ------------------------------------ | -------------------------------------------------------- |
-| `classNames.containerCn`             | Class name for the main container.                       |
-| `classNames.imageContainerCn`        | Class name for the image container.                      |
-| `classNames.imageCn`                 | Class name for the preview image.                        |
-| `classNames.videoBackgroundCn`       | Class name for the background of the video.              |
-| `classNames.inlineVideoBackgroundCn` | Class name specifically for the inline video background. |
-| `classNames.videoCn`                 | Class name for the video element.                        |
-| `classNames.dialogTriggerCn`         | Class name for the dialog trigger that opens the popout. |
-| `classNames.dialogContentCn`         | Class name for the content of the dialog.                |
-| `classNames.dialogOverlayCn`         | Class name for the overlay of the dialog.                |
-| `classNames.dialogCloseCn`           | Class name for the close button of the dialog.           |
-| `classNames.playBtnContainerCn`      | Class name for the container of the play button.         |
-| `classNames.playBtnCn`               | Class name for the play button itself.                   |
+| Prop                                 | CSS Selector                                                    | Description                                   |
+| ------------------------------------ | --------------------------------------------------------------- | --------------------------------------------- |
+| `classNames.rootCn`                  | `.media-video-root`                                             | Root container.                               |
+| `classNames.containerCn`             | `.media-video-container`                                        | Main container.                               |
+| `classNames.imageContainerCn`        | `.media-video-image-container`                                  | Image container.                              |
+| `classNames.imageCn`                 | `.media-video-image`                                            | Preview image.                                |
+| `classNames.videoBackgroundCn`       | `.media-video-auto-play-wrapper`                                | Background of the video.                      |
+| `classNames.inlineVideoBackgroundCn` | `.media-video-inline-player-wrapper`                            | Specifically for the inline video background. |
+| `classNames.videoCn`                 | `.media-video-auto-play-player` or `.media-video-inline-player` | Video element.                                |
+| `classNames.dialogTriggerCn`         | `.media-video-dialog-trigger`                                   | Dialog trigger that opens the popout.         |
+| `classNames.dialogContentCn`         | `.media-video-dialog-content`                                   | Content of the dialog.                        |
+| `classNames.dialogOverlayCn`         | `.media-video-dialog-overlay`                                   | Overlay of the dialog.                        |
+| `classNames.dialogCloseCn`           | `.media-video-dialog-close`                                     | Close button of the dialog.                   |
+| `classNames.playBtnContainerCn`      | `.media-video-play-button-container`                            | Container of the play button.                 |
+| `classNames.playBtnCn`               | `.media-video-play-button`                                      | Play button itself.                           |
+
+### CSS Selectors for Media Video Components
+
+| Component                       | Primary CSS Selector                                                    | Description                                                                                    |
+| ------------------------------- | ----------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `MediaVideoRoot`                | `.comp-media-video-root`                                                | Root element for the entire `MediaVideo` component.                                            |
+| `MediaVideoContainer`           | `.comp-media-video-container`                                           | Wrapper for the main content of `MediaVideo`.                                                  |
+| `MediaVideoPlayerWrapper`       | `.comp-media-video-player-wrapper`                                      | Wrapper specifically for the video player instance, used for styling controls.                 |
+| `MediaVideoImageContainer`      | `.comp-media-video-image-container`                                     | Wrapper for the preview image.                                                                 |
+| `MediaVideoImage`               | `.comp-media-video-image`, `.comp-media-video-image__img`               | Contains the preview image (`img` variant is used within the Sanity image component).          |
+| `MediaVideoPlayButtonContainer` | `.comp-media-video-play-button-container`                               | Wrapper for the play button.                                                                   |
+| `MediaVideoPlayButton`          | `.comp-media-video-play-button`, `.comp-media-video-play-button-inner`  | Styles for the play button, including an optional inner wrapper for icon alignment.            |
+| `MediaVideoPlayer`              | `.comp-media-video-player`                                              | Main video player element; adjusts player layout and dimensions within the component.          |
+| `MediaVideoPopout`              | `.comp-media-video-popout-container`, `.comp-media-video-popout-player` | Popout container and player styles, used for PiP or popout mode adjustments.                   |
+| `MediaVideoAutoPlayVideoLink`   | `.comp-media-video-auto-play-video-link`                                | Styling for autoplay or looping video backgrounds; suppresses controls and adjusts object-fit. |
 
 ### Use your own implementation
 

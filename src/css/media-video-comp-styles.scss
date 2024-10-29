@@ -1,0 +1,147 @@
+/** This file contains all the stylings for the MediaVideoComponents.tsx  */
+
+.comp-media-video-root {
+  position: relative;
+}
+
+.comp-media-video-container {
+  height: 100%;
+  width: 100%;
+}
+
+.comp-media-video-player-wrapper {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.comp-media-video-image-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  opacity: 1;
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+  animation-duration: 300ms;
+
+  // Group hover effect on the play button inside this container
+  &:hover .comp-media-video-play-button-inner {
+    transform: scale(1.1); // Replicates group-hover behavior
+  }
+}
+
+.comp-media-video-play-button {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 9999px;
+
+  @media (min-width: 768px) {
+    height: 5rem;
+    width: 5rem;
+  }
+
+  @media (min-width: 1024px) {
+    height: 6.25rem;
+    width: 6.25rem;
+  }
+
+  .comp-media-video-play-button-inner {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background-color: black;
+    transition-property: color, background-color, border-color,
+      text-decoration-color, fill, stroke, opacity, box-shadow, transform,
+      filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+    animation-duration: 300ms;
+
+    .play-button-icon {
+      z-index: 1;
+      margin-left: 0.375rem;
+      height: 1.2469rem;
+      width: 1.08rem;
+
+      @media (min-width: 768px) {
+        height: 2.0787rem;
+        width: 1.8rem;
+      }
+
+      @media (min-width: 1024px) {
+        height: 2.5981rem;
+        width: 2.25rem;
+      }
+    }
+  }
+}
+
+.comp-media-video-image {
+  height: 100%;
+  width: 100%;
+
+  &__img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.comp-media-video-play-button-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.comp-media-video-player {
+  overflow: hidden;
+  clip-path: content-box; // Use SCSS-compatible syntax if needed
+}
+
+.comp-media-video-popout-container {
+  position: relative;
+  height: fit-content;
+  width: 100%;
+
+  @media (min-width: 1024px) {
+    position: absolute;
+    height: 100%;
+  }
+
+  .comp-media-video-popout-player {
+    display: flex;
+    aspect-ratio: 16 / 9;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+
+    video {
+      height: fit-content !important; // Fit height to content
+      object-fit: contain !important; // Contain video within its box
+
+      @media (min-width: 1024px) {
+        height: 100% !important; // Full height on larger screens
+        object-fit: cover !important; // Cover the entire area
+      }
+    }
+  }
+}
+
+.comp-media-video-auto-play-video-link {
+  // Ensure the video covers the container
+  video {
+    object-fit: cover; // Cover the entire area of the container
+    clip-path: content-box; // Use SCSS-compatible syntax if needed
+  }
+}

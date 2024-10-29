@@ -1,0 +1,83 @@
+.media-video-comp-dialog-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.8);
+
+  // State animations
+  &[data-state='open'] {
+    --enter-opacity: 1; // fade-in-0
+    animation: media-video-enter 0.5s forwards; // animate-in
+  }
+
+  &[data-state='closed'] {
+    --exit-opacity: 0; // fade-out-0
+    animation: media-video-exit 0.5s forwards; // animate-out
+  }
+}
+
+.media-video-comp-dialog-content {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 99999;
+  display: grid;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  gap: 1rem;
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition-duration: 0.2s;
+
+  &[data-state='open'] {
+    --enter-opacity: 1; // fade-in-0
+    --enter-scale: 0.95; // zoom-in-95
+    --enter-translate-x: -50%; // slide-in-from-left-1/2
+    --enter-translate-y: -48%; // slide-in-from-top-[48%]
+    animation: media-video-enter 0.5s forwards; // animate-in
+  }
+
+  &[data-state='closed'] {
+    --exit-opacity: 0; // fade-out-0
+    --exit-scale: 1.05; // zoom-out-95
+    --exit-translate-x: -50%; // slide-out-to-left-1/2
+    --exit-translate-y: -48%; // slide-out-to-top-[48%]
+    animation: media-video-exit 0.5s forwards; // animate-out
+  }
+}
+
+.media-video-comp-dialog-close {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+  &:hover {
+    opacity: 1;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  .media-video-comp-dialog-close-svg {
+    width: 1rem;
+    height: 1rem;
+    color: white;
+  }
+}
+
+.media-video-comp-dialog-title {
+  font-size: 1.125rem; // Equivalent to text-lg
+  font-weight: 600; // Equivalent to font-semibold
+  line-height: 1; // Equivalent to leading-none
+  letter-spacing: -0.015em; // Equivalent to tracking-tight
+}
+
+.media-video-comp-dialog-description {
+  color: #6b7280; // Equivalent to text-gray-500
+  font-size: 0.875rem; // Equivalent to text-sm
+}

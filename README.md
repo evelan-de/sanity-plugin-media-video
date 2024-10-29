@@ -195,8 +195,15 @@ import { MediaVideoProvider } from 'sanity-plugin-media-video/contexts';
 
 **2. Use the renderer component like so. Example usage below**
 
+You will need to require the CSS file from this package (or provide your own). The example below shows how to include the CSS from this package if your build system supports requiring CSS files
+
 ```tsx
 import { MediaVideo } from 'sanity-plugin-media-video/renderer';
+
+// IMPORTANT: require the CSS file from this package
+// Recommended to us the provided CSS as well, but you can override it if you want. 
+// Refer to the table above for the CSS selectors.
+import 'sanity-plugin-media-video/dist/sanity-plugin-media-video.css';
 
 const MyComponent = (props) => {
   return (
@@ -300,6 +307,10 @@ Optionally the plugin also provides some block components to help you build your
 ```tsx
 import { MediaVideoComponents } from 'sanity-plugin-media-video/renderer';
 
+// Recommended to us the provided CSS as well, but you can override it if you want. 
+// Refer to the table above for the CSS selectors.
+import 'sanity-plugin-media-video/dist/sanity-plugin-media-video.css';
+
 const MyCustomComponent = (props) => {
   return (
     <MediaVideoComponents.MediaVideoRoot
@@ -321,6 +332,8 @@ You can also use the hooks provided by the plugin to help you build your own imp
 
 ```tsx
 import { MediaVideoComponents } from 'sanity-plugin-media-video/renderer';
+
+import 'sanity-plugin-media-video/dist/sanity-plugin-media-video.css';
 
 const MyCustomComponent = (props) => {
   const isDesktop = useMediaQuery('(min-width: 1024px)'); // Used to know if the screen is desktop or not

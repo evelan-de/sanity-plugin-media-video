@@ -323,7 +323,7 @@ const MediaVideo = React.forwardRef<
               asChild
               className={cn('media-video-dialog-trigger', dialogTriggerCn)}
             >
-              {imagePreview?.asset.url && (
+              {imagePreview?.asset?.url && (
                 <MediaVideoImageContainer
                   className={cn(
                     'media-video-image-container',

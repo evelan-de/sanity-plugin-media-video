@@ -6,15 +6,18 @@ import { z } from 'zod';
  * @note update type as you use more properties
  */
 const sanityImage = z.object({
-  asset: z.object({
-    _id: z.string(),
-    metadata: z
-      .object({
-        lqip: z.string(),
-      })
-      .optional(),
-    url: z.string().url(),
-  }),
+  asset: z
+    .object({
+      _id: z.string(),
+      metadata: z
+        .object({
+          lqip: z.string(),
+        })
+        .optional(),
+      url: z.string().url(),
+    })
+    .optional()
+    .nullable(),
   crop: z
     .object({
       _type: z.literal('sanity.imageCrop').optional(),
@@ -39,7 +42,7 @@ const sanityImage = z.object({
 
 const sanityImageWithAlt = z
   .object({
-    altText: z.string().optional(),
+    altText: z.string().optional().nullable(),
   })
   .merge(sanityImage);
 
@@ -52,58 +55,58 @@ export type VideoType = z.infer<typeof videoTypeEnum>;
 // #region Mux Video schema
 // Schema for playback ID
 const playbackIdSchema = z.object({
-  id: z.string().optional(),
-  policy: z.enum(['public', 'signed']).optional(),
+  id: z.string().optional().nullable(),
+  policy: z.enum(['public', 'signed']).optional().nullable(),
 });
 
 // Schema for tracks
 const trackSchema = z.object({
-  max_channel_layout: z.string().optional(),
-  max_channels: z.number().optional(),
-  id: z.string().optional(),
-  type: z.enum(['audio', 'video']).optional(),
-  primary: z.boolean().optional(),
-  duration: z.number().optional(),
-  max_frame_rate: z.number().optional(),
-  max_height: z.number().optional(),
-  max_width: z.number().optional(),
+  max_channel_layout: z.string().optional().nullable(),
+  max_channels: z.number().optional().nullable(),
+  id: z.string().optional().nullable(),
+  type: z.enum(['audio', 'video']).optional().nullable(),
+  primary: z.boolean().optional().nullable(),
+  duration: z.number().optional().nullable(),
+  max_frame_rate: z.number().optional().nullable(),
+  max_height: z.number().optional().nullable(),
+  max_width: z.number().optional().nullable(),
 });
 
 // Schema for the 'data' field
 const dataSchema = z.object({
-  encoding_tier: z.string().optional(),
-  max_resolution_tier: z.string().optional(),
-  aspect_ratio: z.string().optional(),
-  created_at: z.string().optional(),
-  duration: z.number().optional(),
-  status: z.enum(['preparing', 'ready', 'errored']).optional(),
-  master_access: z.string().optional(),
-  max_stored_frame_rate: z.number().optional(),
-  playback_ids: z.array(playbackIdSchema).optional(),
-  resolution_tier: z.string().optional(),
-  ingest_type: z.string().optional(),
-  max_stored_resolution: z.string().optional(),
-  tracks: z.array(trackSchema).optional(),
-  id: z.string().optional(),
-  mp4_support: z.string().optional(),
+  encoding_tier: z.string().optional().nullable(),
+  max_resolution_tier: z.string().optional().nullable(),
+  aspect_ratio: z.string().optional().nullable(),
+  created_at: z.string().optional().nullable(),
+  duration: z.number().optional().nullable(),
+  status: z.enum(['preparing', 'ready', 'errored']).optional().nullable(),
+  master_access: z.string().optional().nullable(),
+  max_stored_frame_rate: z.number().optional().nullable(),
+  playback_ids: z.array(playbackIdSchema).optional().nullable(),
+  resolution_tier: z.string().optional().nullable(),
+  ingest_type: z.string().optional().nullable(),
+  max_stored_resolution: z.string().optional().nullable(),
+  tracks: z.array(trackSchema).optional().nullable(),
+  id: z.string().optional().nullable(),
+  mp4_support: z.string().optional().nullable(),
 });
 
 // Schema for the main structure
 const muxVideoAsset = z.object({
-  _id: z.string().optional(),
-  _type: z.literal('mux.videoAsset').optional(),
-  assetId: z.string().optional(),
-  filename: z.string().optional(),
-  status: z.enum(['preparing', 'ready', 'errored']).optional(),
-  playbackId: z.string().optional(),
-  data: dataSchema.optional(),
+  _id: z.string().optional().nullable(),
+  _type: z.literal('mux.videoAsset').optional().nullable(),
+  assetId: z.string().optional().nullable(),
+  filename: z.string().optional().nullable(),
+  status: z.enum(['preparing', 'ready', 'errored']).optional().nullable(),
+  playbackId: z.string().optional().nullable(),
+  data: dataSchema.optional().nullable(),
 });
 
 export type MuxVideoAsset = z.infer<typeof muxVideoAsset>;
 
 const muxVideoSchema = z.object({
   _type: z.literal('mux.video'),
-  asset: muxVideoAsset.optional(),
+  asset: muxVideoAsset.optional().nullable(),
 });
 
 export type MuxVideoType = z.infer<typeof muxVideoSchema>;

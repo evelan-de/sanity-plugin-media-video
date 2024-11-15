@@ -98,11 +98,21 @@ const MediaVideoImage = React.forwardRef<
     { className, imagePreview, sanityImageProps, imageClassName, ...props },
     ref,
   ) => {
-    if (!imagePreview) return null;
+    if (!imagePreview) {
+      return null;
+    }
 
-    const url = imagePreview.asset.url;
+    const url = imagePreview.asset?.url;
+    if (!url) {
+      return null;
+    }
+
     const lastSlashIndex = url.lastIndexOf('/');
     const baseUrl = url.substring(0, lastSlashIndex + 1);
+
+    if (!imagePreview.asset) {
+      return null;
+    }
 
     return (
       <div
@@ -111,7 +121,7 @@ const MediaVideoImage = React.forwardRef<
         {...props}
       >
         <SanityImage
-          id={imagePreview.asset._id}
+          id={imagePreview.asset?._id}
           baseUrl={baseUrl}
           alt={imagePreview.altText || ''}
           preview={imagePreview.asset.metadata?.lqip}

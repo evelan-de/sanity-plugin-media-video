@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.2.0...v1.2.1) (2024-11-15)
+
+### Bug Fixes
+
+- add types to be nullable ([672605a](https://github.com/evelan-de/sanity-plugin-media-video/commit/672605a660dfa7bc64fb3c6d8f19b3e0056a44fa))
+
 ## [1.2.0](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.1.2...v1.2.0) (2024-10-29)
 
 ### Features

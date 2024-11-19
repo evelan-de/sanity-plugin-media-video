@@ -286,12 +286,9 @@ const MediaVideoAutoPlayVideoLink = ({
       controls={false}
       muted
       pip={false}
+      playsinline
       {...videoPlayerProps}
-      className={cn(
-        // '[&>video]:object-cover [clip-path:content-box]',
-        'comp-media-video-auto-play-video-link',
-        className,
-      )}
+      className={cn('comp-media-video-auto-play-video-link', className)}
       config={{
         youtube: {
           playerVars: {

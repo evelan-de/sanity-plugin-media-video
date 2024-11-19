@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.2](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.2.1...v1.2.2) (2024-11-19)
+
+### Bug Fixes
+
+- add "playsinline" to the auto play media video ([94990b2](https://github.com/evelan-de/sanity-plugin-media-video/commit/94990b21c21e51af84e6baed9a46f14cce4f0f61))
+
 ## [1.2.1](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.2.0...v1.2.1) (2024-11-15)
 
 ### Bug Fixes

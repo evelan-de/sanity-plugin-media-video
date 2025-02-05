@@ -201,7 +201,7 @@ You will need to require the CSS file from this package (or provide your own). T
 import { MediaVideo } from 'sanity-plugin-media-video/renderer';
 
 // IMPORTANT: require the CSS file from this package
-// Recommended to us the provided CSS as well, but you can override it if you want. 
+// Recommended to us the provided CSS as well, but you can override it if you want.
 // Refer to the table above for the CSS selectors.
 import 'sanity-plugin-media-video/dist/sanity-plugin-media-video.css';
 
@@ -243,6 +243,7 @@ const MyComponent = (props) => {
 | `muxData`                  | Data object associated with Mux video assets for advanced integrations.                                                   | `undefined` | No       |
 | `videoType`                | Type of video (default is 'link'), could be values like 'link', 'mux', etc.                                               | `'link'`    | No       |
 | `imagePreview`             | The image displayed for the video thumbnail.                                                                              | `null`      | Yes      |
+| `customImageComponent`     | Custom Image Preview component that will be rendered on the image preview.                                                | `undefined` | No       |
 | `isAutoPlay`               | Determines if the video should play automatically.                                                                        | `false`     | No       |
 | `isPipAutomatic`           | Determines if picture-in-picture mode should be enabled automatically.                                                    | `false`     | No       |
 | `customPipId`              | Custom ID for the PIP mode, used for managing multiple instances or special configurations.                               | `undefined` | No       |
@@ -307,7 +308,7 @@ Optionally the plugin also provides some block components to help you build your
 ```tsx
 import { MediaVideoComponents } from 'sanity-plugin-media-video/renderer';
 
-// Recommended to us the provided CSS as well, but you can override it if you want. 
+// Recommended to us the provided CSS as well, but you can override it if you want.
 // Refer to the table above for the CSS selectors.
 import 'sanity-plugin-media-video/dist/sanity-plugin-media-video.css';
 

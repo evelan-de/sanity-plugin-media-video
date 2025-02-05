@@ -38,6 +38,7 @@ import { useMediaVideoPlayback } from './useMediaVideoPlayback';
  * @param muxData - Data object associated with Mux video assets for advanced integrations.
  * @param videoType - Type of video (default is 'link'), could be values like 'link', 'mux', etc.
  * @param imagePreview - The image displayed for the video thumbnail.
+ * @param customImageComponent - Custom Image Preview component that will be rendered on the image preview
  * @param isAutoPlay - Determines if the video should play automatically. Defaults to false.
  * @param isPipAutomatic - Determines if picture-in-picture mode should be enabled automatically. Defaults to false.
  * @param customPipId - Custom ID for the PIP mode, used for managing multiple instances or special configurations.
@@ -74,6 +75,7 @@ const MediaVideo = React.forwardRef<
     muxData: MuxVideoAsset | undefined | null;
     videoType: VideoType | undefined | null;
     imagePreview: SanityImageType | null;
+    customImageComponent?: React.ReactNode;
     isAutoPlay?: boolean;
     isPipAutomatic?: boolean;
     customPipId?: string;
@@ -116,6 +118,7 @@ const MediaVideo = React.forwardRef<
       isPipAutomatic = false,
       customPipId,
       imagePreview,
+      customImageComponent,
       playInPopout,
       playButton,
       autoPlayVideoPlayerProps,
@@ -323,7 +326,7 @@ const MediaVideo = React.forwardRef<
               asChild
               className={cn('media-video-dialog-trigger', dialogTriggerCn)}
             >
-              {imagePreview?.asset?.url && (
+              {(imagePreview?.asset?.url || customImageComponent) && (
                 <MediaVideoImageContainer
                   className={cn(
                     'media-video-image-container',
@@ -331,16 +334,33 @@ const MediaVideo = React.forwardRef<
                     imageContainerCn,
                   )}
                 >
-                  <MediaVideoImage
-                    className={cn(
-                      'media-video-image',
-                      playedByAutoPlay && !showImage
-                        ? 'media-video-image__opacity-0'
-                        : '',
-                    )}
-                    imagePreview={imagePreview}
-                    imageClassName={imageCn}
-                  />
+                  {customImageComponent ? (
+                    <div
+                      className={cn(
+                        'media-video-image comp-media-video-image',
+                        playedByAutoPlay && !showImage
+                          ? 'media-video-image__opacity-0'
+                          : '',
+                      )}
+                    >
+                      {customImageComponent}
+                    </div>
+                  ) : (
+                    <>
+                      {imagePreview?.asset?.url && (
+                        <MediaVideoImage
+                          className={cn(
+                            'media-video-image',
+                            playedByAutoPlay && !showImage
+                              ? 'media-video-image__opacity-0'
+                              : '',
+                          )}
+                          imagePreview={imagePreview}
+                          imageClassName={imageCn}
+                        />
+                      )}
+                    </>
+                  )}
 
                   {!isFloatingPip && (
                     <MediaVideoPlayButtonContainer

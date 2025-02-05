@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.2.2...v1.3.0) (2025-02-05)
+
+### Features
+
+- add support for custom image preview component ([d411f9c](https://github.com/evelan-de/sanity-plugin-media-video/commit/d411f9c576ad3aacedfa088bdaa5b37a490e1ef0))
+
 ## [1.2.2](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.2.1...v1.2.2) (2024-11-19)
 
 ### Bug Fixes

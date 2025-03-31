@@ -7,12 +7,7 @@ import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { MuxVideoAsset, SanityImageType, VideoType } from '../../types/schema';
 import { cn } from '../../utils/cvaUtils';
 import { convertYoutubeToEmbedUrl } from '../../utils/urlUtils';
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogTrigger,
-} from '../dialog/Dialog';
+import { Dialog, DialogContent, DialogTrigger } from '../dialog/Dialog';
 import XIcon from '../icons/XIcon';
 import {
   MediaVideoAutoPlayVideoLink,
@@ -320,11 +315,11 @@ const MediaVideo = React.forwardRef<
             open={isPopoutOpen}
             onOpenChange={(open) => handleClickPlay({ open })}
           >
-            <DialogTitle className='sr-only' />
             {/* Displays the video thumbnail for both mobile/tablet and desktop */}
             <DialogTrigger
               asChild
               className={cn('media-video-dialog-trigger', dialogTriggerCn)}
+              role='button'
             >
               {(imagePreview?.asset?.url || customImageComponent) && (
                 <MediaVideoImageContainer

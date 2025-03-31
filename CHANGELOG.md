@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.3.0...v1.3.1) (2025-03-31)
+
+### Bug Fixes
+
+- accessibility issues in MediaVideo component ([311d2f4](https://github.com/evelan-de/sanity-plugin-media-video/commit/311d2f40bebb433d375eff733b05142470c8646c))
+
 ## [1.3.0](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.2.2...v1.3.0) (2025-02-05)
 
 ### Features

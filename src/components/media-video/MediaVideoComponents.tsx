@@ -1,18 +1,11 @@
 import React from 'react';
-import ReactPlayer, { type ReactPlayerProps } from 'react-player/lazy';
+import ReactPlayer from 'react-player';
+import { ReactPlayerProps } from 'react-player/types';
 import { SanityImage } from 'sanity-image';
 
 import { type SanityImageType } from '../../types/schema';
 import { cn } from '../../utils/cvaUtils';
 import PlayButtonIcon from '../icons/PlayButtonIcon';
-
-/**
- * https://github.com/cookpete/react-player/issues/1690
- * Might have got to do with something about bundling issue with react-player
- */
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore bundling issue with react-player
-const Player = ReactPlayer.default as typeof ReactPlayer;
 
 /**
  * Use this component to wrap a whole `MediaVideo` component.
@@ -202,7 +195,7 @@ const MediaVideoPlayer = ({
   ...reactPlayerProps
 }: MediaVideoPlayerProps) => {
   return (
-    <Player
+    <ReactPlayer
       className={cn('comp-media-video-player', className)}
       width='100%'
       height='100%'
@@ -217,13 +210,13 @@ const MediaVideoPlayer = ({
             host: 'https://www.youtube-nocookie.com',
           },
         },
-        file: {
-          attributes: {
-            preload: 'metadata',
-          },
-          hlsOptions: {
-            startLevel: 6,
-          },
+        // HLS configuration for Mux videos to prevent bufferStalledError in Next.js 15
+        hls: {
+          maxBufferLength: 30, // Increase buffer length to prevent stalling
+          maxMaxBufferLength: 60, // Maximum buffer size for network fluctuations
+          startLevel: -1, // Auto-select initial quality level
+          debug: false, // Set to true for troubleshooting HLS issues
+          progressive: true, // Enable progressive loading for smoother playback
         },
       }}
       {...reactPlayerProps}
@@ -286,7 +279,6 @@ const MediaVideoAutoPlayVideoLink = ({
       controls={false}
       muted
       pip={false}
-      playsinline
       {...videoPlayerProps}
       className={cn('comp-media-video-auto-play-video-link', className)}
       config={{
@@ -310,14 +302,13 @@ const MediaVideoAutoPlayVideoLink = ({
             autoplay: 0,
           },
         },
-        file: {
-          hlsOptions: {
-            startLevel: 9,
-          },
-          attributes: {
-            autoplay: 1,
-            muted: 1,
-          },
+        // HLS configuration for Mux videos to prevent bufferStalledError in Next.js 15
+        hls: {
+          maxBufferLength: 30, // Increase buffer length to prevent stalling
+          maxMaxBufferLength: 60, // Maximum buffer size for network fluctuations
+          startLevel: -1, // Auto-select initial quality level
+          debug: false, // Set to true for troubleshooting HLS issues
+          progressive: true, // Enable progressive loading for smoother playback
         },
       }}
     />

@@ -1,6 +1,5 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { type InViewHookResponse } from 'react-intersection-observer';
-import { OnProgressProps } from 'react-player/base';
 
 import { useMediaVideoContext } from './MediaVideoContext';
 
@@ -46,6 +45,10 @@ const useMediaVideoPlayback = ({
   const [isPopoutOpen, setIsPopoutOpen] = useState(false);
   const [showImage, setShowImage] = useState(true);
   const [pipIsForceClosed, setPipIsForceClosed] = useState(false);
+
+  // Debounced state for autoplay to prevent AbortError
+  const [shouldAutoPlay, setShouldAutoPlay] = useState(false);
+  const autoPlayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // function to toggle PiP
   const setActivePip = useCallback(
@@ -113,9 +116,14 @@ const useMediaVideoPlayback = ({
 
   // Handle video progress to hide the preview image when video starts playing
   const handleOnVideoProgress = useCallback(
-    (event: OnProgressProps): void => {
-      if (showImage && event.playedSeconds > 0.1) {
-        setShowImage(false);
+    (event: React.SyntheticEvent<HTMLVideoElement, Event>): void => {
+      if ('hasPlayed' in event.target && showImage) {
+        if (
+          typeof event.target.hasPlayed === 'boolean' &&
+          event.target.hasPlayed === true
+        ) {
+          setShowImage(false);
+        }
       }
     },
     [showImage],
@@ -184,6 +192,31 @@ const useMediaVideoPlayback = ({
     }
   }, [componentIsInView, isAutoPlay]);
 
+  // Debounced autoplay state to prevent AbortError from rapid state changes
+  useEffect(() => {
+    // Clear any existing timeout to prevent multiple state updates
+    if (autoPlayTimeoutRef.current) {
+      clearTimeout(autoPlayTimeoutRef.current);
+    }
+
+    // Set a timeout to update the autoplay state after a delay
+    autoPlayTimeoutRef.current = setTimeout(() => {
+      setShouldAutoPlay(
+        isAutoPlay === true &&
+          componentIsInView &&
+          !inlinePlay &&
+          isPopoutOpen === false,
+      );
+    }, 500); // 500ms delay to prevent rapid changes
+
+    // Cleanup timeout on unmount or when dependencies change
+    return () => {
+      if (autoPlayTimeoutRef.current) {
+        clearTimeout(autoPlayTimeoutRef.current);
+      }
+    };
+  }, [isAutoPlay, componentIsInView, inlinePlay, isPopoutOpen]);
+
   // Handle loading state when the video is played
   useEffect(() => {
     if (desktopPopoutPlay || inlinePlay) {
@@ -247,6 +280,7 @@ const useMediaVideoPlayback = ({
     isPopoutOpen,
     showImage,
     pipIsForceClosed,
+    shouldAutoPlay, // Expose the debounced autoplay state
     setIsPopoutOpen,
     setDesktopPopoutPlay,
     setLoading,

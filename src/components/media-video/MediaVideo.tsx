@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { type ReactPlayerProps } from 'react-player/lazy';
+import { type ReactPlayerProps } from 'react-player/types';
 import { v4 as uuidv4 } from 'uuid';
 
 import { useMediaQuery } from '../../hooks/useMediaQuery';
@@ -169,8 +169,7 @@ const MediaVideo = React.forwardRef<
       rootMargin: '0px',
       threshold: [0, 0.5, 1],
     });
-    const { ref: topLevelRef, inView: componentIsInView } =
-      intersectionObserver;
+    const { ref: topLevelRef } = intersectionObserver;
 
     // Custom hook to manage video playback state and related events
     const {
@@ -181,6 +180,7 @@ const MediaVideo = React.forwardRef<
       playedByAutoPlay,
       isPopoutOpen,
       isFloatingPip,
+      shouldAutoPlay,
       setInlinePause,
       handleOnVideoProgress,
       handleClickPlay,
@@ -205,7 +205,7 @@ const MediaVideo = React.forwardRef<
     // Prepare shared properties for the video player component
     const reactVideoPlayerProps: MediaVideoPlayerProps = {
       className: cn(videoCn),
-      url: videoLink,
+      src: videoLink,
     };
 
     return (
@@ -231,10 +231,7 @@ const MediaVideo = React.forwardRef<
                 <MediaVideoAutoPlayVideoLink
                   videoPlayerProps={{
                     ...reactVideoPlayerProps,
-                    playing:
-                      isPopoutOpen === false &&
-                      componentIsInView &&
-                      !inlinePlay,
+                    playing: shouldAutoPlay, // Use the debounced state to prevent AbortError
                     controls: false,
                     muted: true,
                     loop: true,
@@ -276,8 +273,8 @@ const MediaVideo = React.forwardRef<
                   setInlinePause(true);
                 }}
                 pip
-                onEnablePIP={() => setActivePip(true)}
-                onDisablePIP={() => setActivePip(false)}
+                onEnterPictureInPicture={() => setActivePip(true)}
+                onLeavePictureInPicture={() => setActivePip(false)}
                 className={cn(
                   'media-video-inline-player',
                   reactVideoPlayerProps.className,
@@ -400,8 +397,8 @@ const MediaVideo = React.forwardRef<
                       muted: !isPopoutOpen,
                       pip: true,
                       onReady: () => handleVideoOnReady(true),
-                      onEnablePIP: () => setActivePip(true),
-                      onDisablePIP: () => setActivePip(false),
+                      onEnterPictureInPicture: () => setActivePip(true),
+                      onLeavePictureInPicture: () => setActivePip(false),
                       ...videoPlayerProps,
                     }}
                   />

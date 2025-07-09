@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.3](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.3.2...v1.3.3) (2025-07-09)
+
+### Bug Fixes
+
+- resolve video playback errors in React Player ([4ad7234](https://github.com/evelan-de/sanity-plugin-media-video/commit/4ad7234be29052bb1ab163ff2d4e5087f51eb2a8))
+
 ## [1.3.2](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.3.1...v1.3.2) (2025-06-17)
 
 ### Bug Fixes

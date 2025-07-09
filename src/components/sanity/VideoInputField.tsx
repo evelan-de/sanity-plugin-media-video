@@ -3,6 +3,14 @@ import React, { FC } from 'react';
 import ReactPlayer from 'react-player';
 import { StringInputProps } from 'sanity';
 
+/**
+ * https://github.com/cookpete/react-player/issues/1690
+ * Might have got to do with something about bundling issue with react-player
+ */
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore bundling issue with react-player
+const Player = ReactPlayer.default as typeof ReactPlayer;
+
 /*
 This component adds a custom component that displays a Video Preview of the media schema when
 type is 'link'
@@ -20,7 +28,7 @@ const VideoInputField: FC<StringInputProps> = (props: StringInputProps) => {
         <div
           style={{ position: 'relative', width: '100%', paddingTop: '56.25%' }}
         >
-          <ReactPlayer
+          <Player
             style={{
               position: 'absolute',
               left: 0,
@@ -33,7 +41,7 @@ const VideoInputField: FC<StringInputProps> = (props: StringInputProps) => {
             controls
             pip={false}
             playsInline
-            src={value}
+            url={value}
             config={{
               // https://developers.google.com/youtube/player_parameters
               youtube: {
@@ -43,13 +51,13 @@ const VideoInputField: FC<StringInputProps> = (props: StringInputProps) => {
                   host: 'https://www.youtube-nocookie.com',
                 },
               },
-              // HLS configuration for Mux videos to prevent bufferStalledError in Next.js 15
-              hls: {
-                startLevel: 6, // Fixed quality level (higher number = higher quality)
-                maxBufferLength: 30, // Increase buffer length to prevent stalling
-                maxMaxBufferLength: 60, // Maximum buffer size for network fluctuations
-                debug: false, // Set to true for troubleshooting HLS issues
-                progressive: true, // Enable progressive loading for smoother playback
+              file: {
+                attributes: {
+                  preload: 'metadata',
+                },
+                hlsOptions: {
+                  startLevel: 6,
+                },
               },
             }}
           />

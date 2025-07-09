@@ -1,11 +1,18 @@
-import React from 'react';
-import ReactPlayer from 'react-player';
-import { ReactPlayerProps } from 'react-player/types';
+import React, { useEffect, useRef, useState } from 'react';
+import ReactPlayer, { type ReactPlayerProps } from 'react-player/lazy';
 import { SanityImage } from 'sanity-image';
 
 import { type SanityImageType } from '../../types/schema';
 import { cn } from '../../utils/cvaUtils';
 import PlayButtonIcon from '../icons/PlayButtonIcon';
+
+/**
+ * https://github.com/cookpete/react-player/issues/1690
+ * Might have got to do with something about bundling issue with react-player
+ */
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore bundling issue with react-player
+const Player = ReactPlayer.default as typeof ReactPlayer;
 
 /**
  * Use this component to wrap a whole `MediaVideo` component.
@@ -195,7 +202,7 @@ const MediaVideoPlayer = ({
   ...reactPlayerProps
 }: MediaVideoPlayerProps) => {
   return (
-    <ReactPlayer
+    <Player
       className={cn('comp-media-video-player', className)}
       width='100%'
       height='100%'
@@ -210,13 +217,13 @@ const MediaVideoPlayer = ({
             host: 'https://www.youtube-nocookie.com',
           },
         },
-        // HLS configuration for Mux videos to prevent bufferStalledError in Next.js 15
-        hls: {
-          maxBufferLength: 30, // Increase buffer length to prevent stalling
-          maxMaxBufferLength: 60, // Maximum buffer size for network fluctuations
-          startLevel: -1, // Auto-select initial quality level
-          debug: false, // Set to true for troubleshooting HLS issues
-          progressive: true, // Enable progressive loading for smoother playback
+        file: {
+          attributes: {
+            preload: 'metadata',
+          },
+          hlsOptions: {
+            startLevel: 6,
+          },
         },
       }}
       {...reactPlayerProps}
@@ -274,11 +281,99 @@ const MediaVideoAutoPlayVideoLink = ({
   videoPlayerProps: MediaVideoPlayerProps;
   className?: string;
 }) => {
+  // Add ref to control the player directly
+  const playerRef = useRef<ReactPlayer>(null);
+  const [isReady, setIsReady] = useState(false);
+
+  // Handle player ready state
+  const handleReady = () => {
+    setIsReady(true);
+    // Player is ready for playback
+  };
+
+  // First effect: Always mute the player as soon as it's ready
+  useEffect(() => {
+    if (!playerRef.current || !isReady) return;
+
+    // Immediately mute the player to prevent any unmuted playback
+    try {
+      if (playerRef.current && playerRef.current.getInternalPlayer) {
+        const internalPlayer = playerRef.current.getInternalPlayer();
+
+        // Explicitly set muted property on the internal player
+        if (internalPlayer) {
+          // Different player types have different ways to mute
+          if (typeof internalPlayer.muted !== 'undefined') {
+            // HTML5 video element
+            internalPlayer.muted = true;
+          } else if (
+            internalPlayer.setMuted &&
+            typeof internalPlayer.setMuted === 'function'
+          ) {
+            // Some players have a setMuted method
+            internalPlayer.setMuted(true);
+          } else if (
+            internalPlayer.setVolume &&
+            typeof internalPlayer.setVolume === 'function'
+          ) {
+            // Some players use volume instead
+            internalPlayer.setVolume(0);
+          }
+
+          // Set the loop as well to true
+          if (
+            'loop' in internalPlayer &&
+            typeof internalPlayer.loop === 'boolean' &&
+            internalPlayer.loop === false
+          ) {
+            internalPlayer.loop = true;
+          }
+        }
+      }
+    } catch (_) {
+      // Handle player control errors silently
+    }
+  }, [isReady]); // Only depend on isReady, so it runs once when player is ready
+
+  // Second effect: Handle play/pause based on the playing prop
+  useEffect(() => {
+    if (!playerRef.current || !isReady) return;
+
+    try {
+      const internalPlayer = playerRef.current.getInternalPlayer();
+      if (!internalPlayer || typeof internalPlayer.play !== 'function') return;
+
+      if (videoPlayerProps.playing) {
+        // Small timeout to avoid rapid play/pause calls
+        const timeoutId = setTimeout(() => {
+          internalPlayer.play().catch(() => {
+            // Handle play error silently
+          });
+        }, 100);
+
+        // Return a simple function expression without using void
+        // eslint-disable-next-line consistent-return
+        return () => {
+          clearTimeout(timeoutId);
+          // No return value
+        };
+      } else if (typeof internalPlayer.pause === 'function') {
+        internalPlayer.pause();
+      }
+    } catch (_) {
+      // Handle player control errors silently
+    }
+  }, [videoPlayerProps.playing, isReady]); // Depend on playing prop and isReady
+
   return (
     <MediaVideoPlayer
       controls={false}
       muted
       pip={false}
+      playsinline
+      ref={playerRef}
+      onReady={handleReady}
+      volume={0}
       {...videoPlayerProps}
       className={cn('comp-media-video-auto-play-video-link', className)}
       config={{
@@ -302,13 +397,14 @@ const MediaVideoAutoPlayVideoLink = ({
             autoplay: 0,
           },
         },
-        // HLS configuration for Mux videos to prevent bufferStalledError in Next.js 15
-        hls: {
-          maxBufferLength: 30, // Increase buffer length to prevent stalling
-          maxMaxBufferLength: 60, // Maximum buffer size for network fluctuations
-          startLevel: -1, // Auto-select initial quality level
-          debug: false, // Set to true for troubleshooting HLS issues
-          progressive: true, // Enable progressive loading for smoother playback
+        file: {
+          hlsOptions: {
+            startLevel: 9,
+          },
+          attributes: {
+            autoplay: 1,
+            muted: 1,
+          },
         },
       }}
     />

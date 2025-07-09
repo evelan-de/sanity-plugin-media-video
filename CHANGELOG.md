@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.4](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.3.3...v1.3.4) (2025-07-09)
+
+### Bug Fixes
+
+- revert back to v2 and resolve autoplay and muting issues ([060905b](https://github.com/evelan-de/sanity-plugin-media-video/commit/060905ba34854a407e00476b3862e10a1303dc1d))
+
 ## [1.3.3](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.3.2...v1.3.3) (2025-07-09)
 
 ### Bug Fixes

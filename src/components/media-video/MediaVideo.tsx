@@ -244,6 +244,12 @@ const MediaVideo = React.forwardRef<
                     style: {
                       '--media-object-fit': 'cover',
                       '--media-object-position': 'center',
+                      // Hide the dialog entirely to prevent accessibility issues with the close button
+                      // MUX PLAYER ACCESSIBILITY FIX:
+                      // This styling addresses a PageSpeed Insights accessibility issue where the close button
+                      // inside the Mux Player's mxp-dialog component lacks an accessible name (aria-label).
+                      '--media-dialog-display': 'none',
+                      '--dialog': 'none',
                     } as React.CSSProperties,
                     ...autoPlayVideoPlayerProps,
                   }}

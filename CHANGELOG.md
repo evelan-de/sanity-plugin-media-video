@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.5](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.3.4...v1.3.5) (2025-08-06)
+
+### Bug Fixes
+
+- hide Mux Player dialog for to fix inaccessible close button ([84114f0](https://github.com/evelan-de/sanity-plugin-media-video/commit/84114f0de2992ce03eb90229db795c3c856dc3f3))
+
 ## [1.3.4](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.3.3...v1.3.4) (2025-07-09)
 
 ### Bug Fixes

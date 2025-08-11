@@ -40,6 +40,10 @@ module.exports = {
       'warn',
       {
         ignoreRestSiblings: true,
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        caughtErrors: 'all',
+        caughtErrorsIgnorePattern: '^_',
       },
     ],
     'no-console': [

@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.2](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.4.1...v1.4.2) (2025-08-18)
+
+### Bug Fixes
+
+- revert and remove @sanity/browserslist-config ([7431b3f](https://github.com/evelan-de/sanity-plugin-media-video/commit/7431b3fa53f2790c355775b1f7be79a78598dbc2))
+
 ## [1.4.1](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.4.0...v1.4.1) (2025-08-18)
 
 ### Bug Fixes

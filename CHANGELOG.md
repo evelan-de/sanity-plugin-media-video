@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.3](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.4.2...v1.4.3) (2025-08-20)
+
+### Bug Fixes
+
+- used v1.1.2 for @radix-ui/react-dialog to fix issue with JSX issue ([83b1c32](https://github.com/evelan-de/sanity-plugin-media-video/commit/83b1c32a7d980ecb21ae5cf0b6624908a702f55d))
+
 ## [1.4.2](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.4.1...v1.4.2) (2025-08-18)
 
 ### Bug Fixes

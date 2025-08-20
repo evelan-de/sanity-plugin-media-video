@@ -95,9 +95,9 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@radix-ui/react-dialog": "1.1.14",
+    "@radix-ui/react-dialog": "1.1.2",
     "@sanity/incompatible-plugin": "1.0.5",
-    "@sanity/ui": "2.8.9",
+    "@sanity/ui": "2.16.7",
     "react-intersection-observer": "9.16.0",
     "react-player": "2.16.0",
     "sanity-image": "1.0.0"
@@ -109,8 +109,8 @@
     "@sanity/plugin-kit": "4.0.19",
     "@sanity/semantic-release-preset": "5.0.0",
     "@types/react": "18.3.11",
-    "@typescript-eslint/eslint-plugin": "8.39.0",
-    "@typescript-eslint/parser": "8.39.0",
+    "@typescript-eslint/eslint-plugin": "8.40.0",
+    "@typescript-eslint/parser": "8.40.0",
     "autoprefixer": "10.4.21",
     "clsx": "2.1.1",
     "eslint": "8.57.1",
@@ -121,7 +121,7 @@
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "5.2.0",
     "eslint-plugin-simple-import-sort": "12.1.1",
-    "eslint-plugin-unused-imports": "4.1.4",
+    "eslint-plugin-unused-imports": "4.2.0",
     "husky": "9.1.7",
     "lint-staged": "16.1.5",
     "postcss": "8.5.6",

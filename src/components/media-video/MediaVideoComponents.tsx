@@ -402,7 +402,6 @@ const MediaVideoAutoPlayVideoLink = ({
             startLevel: 9,
           },
           attributes: {
-            autoplay: 1,
             muted: 1,
           },
         },

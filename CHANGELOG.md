@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.4](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.4.3...v1.4.4) (2025-08-26)
+
+### Bug Fixes
+
+- remove autoplay from hls config to fix console log error ([2a8b410](https://github.com/evelan-de/sanity-plugin-media-video/commit/2a8b410bb39185fcb3232832fcfd703db2f87460))
+
 ## [1.4.3](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.4.2...v1.4.3) (2025-08-20)
 
 ### Bug Fixes

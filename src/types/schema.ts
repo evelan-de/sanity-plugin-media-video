@@ -14,7 +14,7 @@ const sanityImage = z.object({
           lqip: z.string(),
         })
         .optional(),
-      url: z.string().url(),
+      url: z.url(),
     })
     .optional()
     .nullable(),
@@ -44,7 +44,7 @@ const sanityImageWithAlt = z
   .object({
     altText: z.string().optional().nullable(),
   })
-  .merge(sanityImage);
+  .extend(sanityImage.shape);
 
 export type SanityImageType = z.infer<typeof sanityImageWithAlt>;
 
@@ -119,7 +119,7 @@ export const mediaVideoSchema = z.object({
   videoType: videoTypeEnum.optional().nullable(),
   isAutoPlay: z.boolean().optional().nullable(),
   isPipAutomatic: z.boolean().optional().nullable(),
-  videoUrl: z.string().url().optional().nullable(),
+  videoUrl: z.url().optional().nullable(),
   muxVideo: muxVideoSchema.optional().nullable(),
 });
 

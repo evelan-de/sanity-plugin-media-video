@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 // Define the Zod schema for MediaVideoPluginOptions
 export const mediaVideoPluginOptionsSchema = z.object({
-  isImageRequired: z.boolean().default(true).optional(),
+  isImageRequired: z.boolean().prefault(true).optional(),
 });
 
 // Infer the type from the Zod schema

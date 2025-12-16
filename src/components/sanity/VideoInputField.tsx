@@ -3,13 +3,11 @@ import React, { FC } from 'react';
 import ReactPlayer from 'react-player';
 import { StringInputProps } from 'sanity';
 
-/**
- * https://github.com/cookpete/react-player/issues/1690
- * Might have got to do with something about bundling issue with react-player
- */
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore bundling issue with react-player
-const Player = ReactPlayer.default as typeof ReactPlayer;
+// Normalize default export across ESM/CJS to avoid undefined component in Next 16
+// https://github.com/cookpete/react-player/issues/1690
+const unwrapDefault = (value: unknown) =>
+  (value as { default?: unknown } | null | undefined)?.default ?? value;
+const Player = unwrapDefault(unwrapDefault(ReactPlayer)) as typeof ReactPlayer;
 
 /*
 This component adds a custom component that displays a Video Preview of the media schema when

@@ -12,7 +12,11 @@ import PlayButtonIcon from '../icons/PlayButtonIcon';
  */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore bundling issue with react-player
-const Player = ReactPlayer.default as typeof ReactPlayer;
+const unwrapDefault = (value: unknown) =>
+  (value as { default?: unknown } | null | undefined)?.default ?? value;
+const PlayerComponent: React.ComponentType<ReactPlayerProps> = unwrapDefault(
+  unwrapDefault(ReactPlayer),
+) as React.ComponentType<ReactPlayerProps>;
 
 /**
  * Use this component to wrap a whole `MediaVideo` component.
@@ -197,12 +201,11 @@ export type MediaVideoPlayerProps = ReactPlayerProps & {
  * Use this component to display the inline video player
  */
 const MediaVideoPlayer = ({
-  key,
   className,
   ...reactPlayerProps
 }: MediaVideoPlayerProps) => {
   return (
-    <Player
+    <PlayerComponent
       className={cn('comp-media-video-player', className)}
       width='100%'
       height='100%'

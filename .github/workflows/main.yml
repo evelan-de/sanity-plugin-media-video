@@ -102,6 +102,8 @@ jobs:
           # Need to fetch entire commit history to
           # analyze every commit since last release
           fetch-depth: 0
+      - name: Fetch all tags
+        run: git fetch --tags
       - uses: actions/setup-node@v3
         with:
           cache: npm

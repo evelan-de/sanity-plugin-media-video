@@ -74,6 +74,21 @@ All notable changes to this project will be documented in this file. See
 
 ### Bug Fixes
 
+- bump version to 1.6.0 to unblock release ([7cc3c83](https://github.com/evelan-de/sanity-plugin-media-video/commit/7cc3c831f79299e3779131d6b57ffc80349cf56c))
+- recover from failed 1.5.0 release ([a932290](https://github.com/evelan-de/sanity-plugin-media-video/commit/a932290deb0c0182c2d5319183678cdec6588d97))
+- recover from failed release ([af166ca](https://github.com/evelan-de/sanity-plugin-media-video/commit/af166cac70cb7c5aaf5e6279f0f69c70b74c0155))
+- recover from failed release ([ecf2609](https://github.com/evelan-de/sanity-plugin-media-video/commit/ecf26094bb7ec2dca54f59b880ab2d828a65f83a))
+- tag inconsistencies ([d0f312c](https://github.com/evelan-de/sanity-plugin-media-video/commit/d0f312cf1072e0b40cf719d9e2c2ecad6f7f47b3))
+
+## [1.5.0](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.4.4...v1.5.0) (2025-12-18)
+
+### Features
+
+- hardened the react-player import ([95df1f3](https://github.com/evelan-de/sanity-plugin-media-video/commit/95df1f34c663bc3ccf76730bebe145767e73d527))
+- **WEB-837:** [#comment](https://github.com/evelan-de/sanity-plugin-media-video/issues/comment) upgrades zod to v4 ([00b9edd](https://github.com/evelan-de/sanity-plugin-media-video/commit/00b9eddfd8454599a735d8681456d55deb979337))
+
+### Bug Fixes
+
 - recover from failed 1.5.0 release ([a932290](https://github.com/evelan-de/sanity-plugin-media-video/commit/a932290deb0c0182c2d5319183678cdec6588d97))
 - recover from failed release ([af166ca](https://github.com/evelan-de/sanity-plugin-media-video/commit/af166cac70cb7c5aaf5e6279f0f69c70b74c0155))
 - recover from failed release ([ecf2609](https://github.com/evelan-de/sanity-plugin-media-video/commit/ecf26094bb7ec2dca54f59b880ab2d828a65f83a))

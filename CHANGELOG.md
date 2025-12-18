@@ -5,6 +5,16 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.5.0...v2.0.0) (2025-12-18)
+
+### ⚠ BREAKING CHANGES
+
+- bump to 2.0.0
+
+### Bug Fixes
+
+- resolve versioning and release issues ([e27363d](https://github.com/evelan-de/sanity-plugin-media-video/commit/e27363dfe74cb795fbcf1e5cb35cc2d9ca5cf989))
+
 ## [1.5.0](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.4.4...v1.5.0) (2025-12-18)
 
 ### Features

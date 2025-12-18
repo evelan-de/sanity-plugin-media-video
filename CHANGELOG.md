@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.4.4...v1.5.0) (2025-12-18)
+
+### Features
+
+- hardened the react-player import ([95df1f3](https://github.com/evelan-de/sanity-plugin-media-video/commit/95df1f34c663bc3ccf76730bebe145767e73d527))
+- **WEB-837:** [#comment](https://github.com/evelan-de/sanity-plugin-media-video/issues/comment) upgrades zod to v4 ([00b9edd](https://github.com/evelan-de/sanity-plugin-media-video/commit/00b9eddfd8454599a735d8681456d55deb979337))
+
 ## [1.5.0](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.4.4...v1.5.0) (2025-10-14)
 
 ### Features

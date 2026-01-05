@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/evelan-de/sanity-plugin-media-video/compare/v2.0.0...v2.0.1) (2026-01-05)
+
+### Bug Fixes
+
+- upgrade to sanity v5 and react 19 ([343b599](https://github.com/evelan-de/sanity-plugin-media-video/commit/343b59998c999ec795808d1376611f211257e726))
+
 ## [2.0.0](https://github.com/evelan-de/sanity-plugin-media-video/compare/v1.5.0...v2.0.0) (2025-12-18)
 
 ### ⚠ BREAKING CHANGES

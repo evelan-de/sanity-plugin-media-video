@@ -1,7 +1,10 @@
-import { Stack, TextInput } from '@sanity/ui';
+import { Flex, Stack, TextInput } from '@sanity/ui';
 import React, { FC } from 'react';
 import ReactPlayer from 'react-player';
-import { StringInputProps } from 'sanity';
+import { StringInputProps, useTranslation } from 'sanity';
+
+import { I18N_NAMESPACE } from '../../utils/constants';
+import GetThumbnailButton from './GetThumbnailButton';
 
 // Normalize default export across ESM/CJS to avoid undefined component in Next 16
 // https://github.com/cookpete/react-player/issues/1690
@@ -16,10 +19,16 @@ type is 'link'
 const VideoInputField: FC<StringInputProps> = (props: StringInputProps) => {
   const { elementProps } = props;
   const { value } = elementProps;
+  const { t } = useTranslation(I18N_NAMESPACE);
 
   return (
     <Stack space={2}>
-      <TextInput {...elementProps} />
+      <Flex gap={2} align='center'>
+        <div style={{ flex: 1 }}>
+          <TextInput {...elementProps} />
+        </div>
+        <GetThumbnailButton videoUrl={value} t={t} />
+      </Flex>
 
       {value && (
         /* Player ratio: 100 / (1280 / 720) */

@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.2](https://github.com/evelan-de/sanity-plugin-media-video/compare/v2.0.1...v2.0.2) (2026-03-30)
+
+### Bug Fixes
+
+- configure workflow permissions and streamline release steps ([4859fc6](https://github.com/evelan-de/sanity-plugin-media-video/commit/4859fc6a81a45d56e4d2b37df32659804fd57fda))
+
 ## [2.0.1](https://github.com/evelan-de/sanity-plugin-media-video/compare/v2.0.0...v2.0.1) (2026-01-05)
 
 ### Bug Fixes

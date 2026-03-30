@@ -5,6 +5,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.0](https://github.com/evelan-de/sanity-plugin-media-video/compare/v2.0.2...v2.1.0) (2026-03-30)
+
+### Features
+
+- add extractYouTubeVideoId utility function ([4e77504](https://github.com/evelan-de/sanity-plugin-media-video/commit/4e77504d8493c85bd32c4f827332a9923d784a49))
+- add Get Thumbnail button implementation plan ([7daa23e](https://github.com/evelan-de/sanity-plugin-media-video/commit/7daa23e784bf824933b1f03ef357b629c7e86fe6))
+- add GetThumbnailButton component ([dcf6336](https://github.com/evelan-de/sanity-plugin-media-video/commit/dcf63362638b623ee41835436af715e2eb84c1c4))
+- add i18n translations for get thumbnail feature ([fe301fe](https://github.com/evelan-de/sanity-plugin-media-video/commit/fe301fed0eaa9d58bbd3cb61f0f2be8f448cedb7))
+- add thumbnail provider pattern with YouTube support ([ec1f439](https://github.com/evelan-de/sanity-plugin-media-video/commit/ec1f439fad59122e9b82a73ced3fa9e347ae1157))
+- add ThumbnailConfirmDialog component ([1ec1e05](https://github.com/evelan-de/sanity-plugin-media-video/commit/1ec1e057577c7b0bc08f473a027d87565f485ac5))
+- integrate GetThumbnailButton into VideoInputField ([599233f](https://github.com/evelan-de/sanity-plugin-media-video/commit/599233fd1e4b7959413d6fbb0b043f03a0863cc9))
+- make GetThumbnailButton path-aware for nested media objects ([7021f57](https://github.com/evelan-de/sanity-plugin-media-video/commit/7021f5769958f44c4677831160da47928e17e482))
+
 ## [2.0.2](https://github.com/evelan-de/sanity-plugin-media-video/compare/v2.0.1...v2.0.2) (2026-03-30)
 
 ### Bug Fixes

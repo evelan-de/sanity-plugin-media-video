@@ -84,6 +84,8 @@
     "v2-incompatible.js"
   ],
   "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
     "build-css": "sass src/css/styles.scss:dist/sanity-plugin-media-video.css --style compressed",
     "build": "npm run build-css && plugin-kit verify-package --silent && pkg-utils build --strict --clean && npm run build-css && pkg-utils check",
     "format": "prettier --write --cache --ignore-unknown .",
@@ -132,7 +134,8 @@
     "sanity": "5.18.0",
     "sass": "1.98.0",
     "styled-components": "6.3.12",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "vitest": "^4.1.2"
   },
   "peerDependencies": {
     "react": "^19",

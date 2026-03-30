@@ -17,3 +17,44 @@ export const convertYoutubeToEmbedUrl = (url: string): string => {
 
   return url; // Return the original URL if it's not a YouTube URL or the video ID is not found
 };
+
+/**
+ * Extracts YouTube video ID from various URL formats.
+ * Supports: youtube.com/watch?v=, youtu.be/, youtube.com/embed/, youtube-nocookie.com/embed/
+ * Returns null if the URL is not a valid YouTube URL or the video ID cannot be extracted.
+ */
+export const extractYouTubeVideoId = (url: string): string | null => {
+  try {
+    const parsed = new URL(url);
+    const { hostname, pathname, searchParams } = parsed;
+
+    // youtube.com/watch?v=VIDEO_ID
+    if (
+      (hostname.includes('youtube.com') ||
+        hostname.includes('youtube-nocookie.com')) &&
+      pathname === '/watch'
+    ) {
+      return searchParams.get('v');
+    }
+
+    // youtube.com/embed/VIDEO_ID or youtube-nocookie.com/embed/VIDEO_ID
+    if (
+      (hostname.includes('youtube.com') ||
+        hostname.includes('youtube-nocookie.com')) &&
+      pathname.startsWith('/embed/')
+    ) {
+      const id = pathname.split('/embed/')[1]?.split(/[/?]/)[0];
+      return id || null;
+    }
+
+    // youtu.be/VIDEO_ID
+    if (hostname === 'youtu.be') {
+      const id = pathname.slice(1).split(/[/?]/)[0];
+      return id || null;
+    }
+
+    return null;
+  } catch {
+    return null;
+  }
+};

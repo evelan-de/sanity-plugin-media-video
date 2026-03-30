@@ -1,6 +1,6 @@
-import { Button, Spinner, useToast } from '@sanity/ui';
-import React, { FC, useCallback, useState } from 'react';
-import { useClient, useFormValue } from 'sanity';
+import { Box, Button, Spinner, Text, Tooltip, useToast } from '@sanity/ui';
+import React, { FC, useCallback, useMemo, useState } from 'react';
+import { Path, useClient, useFormValue } from 'sanity';
 
 import { I18N_NAMESPACE } from '../../utils/constants';
 import {
@@ -9,16 +9,55 @@ import {
 } from '../../utils/thumbnailProviders';
 import ThumbnailConfirmDialog from './ThumbnailConfirmDialog';
 
+/**
+ * Converts a Sanity path array to a dot-notation string for client.patch().set().
+ *
+ * Examples:
+ *   ['media', 'image']                                     → 'media.image'
+ *   ['body', {_key: 'abc'}, 'media', 'image']              → 'body[_key=="abc"].media.image'
+ *   ['hero', 'media', 'image']                              → 'hero.media.image'
+ *   ['sections', {_key: 'a'}, 'content', 'media', 'image'] → 'sections[_key=="a"].content.media.image'
+ */
+const pathToString = (path: Path): string => {
+  return path
+    .map((segment) => {
+      if (typeof segment === 'string') {
+        return segment;
+      }
+      if (typeof segment === 'object' && '_key' in segment) {
+        return `[_key=="${segment._key}"]`;
+      }
+      return `[${String(segment)}]`;
+    })
+    .reduce((acc, segment) => {
+      if (segment.startsWith('[')) {
+        return acc + segment;
+      }
+      return acc ? `${acc}.${segment}` : segment;
+    }, '');
+};
+
 interface GetThumbnailButtonProps {
   videoUrl: string | undefined;
+  path: Path;
   t: (key: string) => string;
 }
 
-const GetThumbnailButton: FC<GetThumbnailButtonProps> = ({ videoUrl, t }) => {
+const GetThumbnailButton: FC<GetThumbnailButtonProps> = ({
+  videoUrl,
+  path,
+  t,
+}) => {
   const client = useClient({ apiVersion: '2024-01-01' });
   const documentId = useFormValue(['_id']) as string | undefined;
-  const imageValue = useFormValue(['image']) as { asset?: unknown } | undefined;
   const toast = useToast();
+
+  // Derive sibling image path from current field's path
+  // path = [..., 'videoUrl'] → parentPath = [...] → imagePath = [..., 'image']
+  const parentPath = useMemo(() => path.slice(0, -1), [path]);
+  const imagePath = useMemo(() => [...parentPath, 'image'], [parentPath]);
+
+  const imageValue = useFormValue(imagePath) as { asset?: unknown } | undefined;
 
   const [isLoading, setIsLoading] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -48,15 +87,16 @@ const GetThumbnailButton: FC<GetThumbnailButtonProps> = ({ videoUrl, t }) => {
           contentType: 'image/jpeg',
         });
 
-        // Use the raw document ID (strip "drafts." prefix if present for patching)
-        const rawId = documentId.replace(/^drafts\./, '');
+        const patchId = documentId.startsWith('drafts.')
+          ? documentId
+          : `drafts.${documentId}`;
+
+        const imagePathStr = pathToString(imagePath);
 
         await client
-          .patch(
-            documentId.startsWith('drafts.') ? documentId : `drafts.${rawId}`,
-          )
+          .patch(patchId)
           .set({
-            'image.asset': {
+            [`${imagePathStr}.asset`]: {
               _type: 'reference',
               _ref: asset._id,
             },
@@ -75,7 +115,7 @@ const GetThumbnailButton: FC<GetThumbnailButtonProps> = ({ videoUrl, t }) => {
         });
       }
     },
-    [client, documentId, toast, t],
+    [client, documentId, imagePath, toast, t],
   );
 
   const handleClick = useCallback(async () => {
@@ -137,19 +177,31 @@ const GetThumbnailButton: FC<GetThumbnailButtonProps> = ({ videoUrl, t }) => {
 
   return (
     <>
-      <Button
-        text={
-          isLoading
-            ? undefined
-            : t(`${I18N_NAMESPACE}:getThumbnail.button.title`)
+      <Tooltip
+        content={
+          <Box padding={2}>
+            <Text size={1} muted>
+              {t(`${I18N_NAMESPACE}:getThumbnail.button.tooltip`)}
+            </Text>
+          </Box>
         }
-        icon={isLoading ? Spinner : undefined}
-        mode='ghost'
-        tone='primary'
-        disabled={isDisabled}
-        onClick={handleClick}
-        style={{ whiteSpace: 'nowrap' }}
-      />
+        placement='top'
+        portal
+      >
+        <Button
+          text={
+            isLoading
+              ? undefined
+              : t(`${I18N_NAMESPACE}:getThumbnail.button.title`)
+          }
+          icon={isLoading ? Spinner : undefined}
+          mode='ghost'
+          tone='primary'
+          disabled={isDisabled}
+          onClick={handleClick}
+          style={{ whiteSpace: 'nowrap' }}
+        />
+      </Tooltip>
       {fetchedThumbnailUrl && (
         <ThumbnailConfirmDialog
           open={dialogOpen}

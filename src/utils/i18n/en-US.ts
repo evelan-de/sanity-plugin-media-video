@@ -22,6 +22,8 @@ export const DEFAULT_EN_SCHEMA_TRANSLATIONS = removeUndefinedLocaleResources({
   'videoUrl.required.title': 'Video Link is required',
   'muxVideo.required.title': 'Mux Video is required',
   'getThumbnail.button.title': 'Get Thumbnail',
+  'getThumbnail.button.tooltip':
+    'Fetches the video thumbnail from the URL and sets it as the image',
   'getThumbnail.dialog.title': 'Set Thumbnail',
   'getThumbnail.dialog.description':
     'This will replace the current image. Continue?',

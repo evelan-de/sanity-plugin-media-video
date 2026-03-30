@@ -17,7 +17,7 @@ This component adds a custom component that displays a Video Preview of the medi
 type is 'link'
 */
 const VideoInputField: FC<StringInputProps> = (props: StringInputProps) => {
-  const { elementProps } = props;
+  const { elementProps, path } = props;
   const { value } = elementProps;
   const { t } = useTranslation(I18N_NAMESPACE);
 
@@ -27,7 +27,7 @@ const VideoInputField: FC<StringInputProps> = (props: StringInputProps) => {
         <div style={{ flex: 1 }}>
           <TextInput {...elementProps} />
         </div>
-        <GetThumbnailButton videoUrl={value} t={t} />
+        <GetThumbnailButton videoUrl={value} path={path} t={t} />
       </Flex>
 
       {value && (

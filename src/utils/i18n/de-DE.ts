@@ -22,4 +22,14 @@ export const DEFAULT_DE_SCHEMA_TRANSLATIONS = removeUndefinedLocaleResources({
   'videoUrl.title': 'Videolink',
   'videoUrl.required.title': 'Videolink ist erforderlich',
   'muxVideo.required.title': 'Mux-Video ist erforderlich',
+  'getThumbnail.button.title': 'Vorschaubild abrufen',
+  'getThumbnail.dialog.title': 'Vorschaubild setzen',
+  'getThumbnail.dialog.description':
+    'Das aktuelle Bild wird ersetzt. Fortfahren?',
+  'getThumbnail.dialog.confirm': 'Bestätigen',
+  'getThumbnail.dialog.cancel': 'Abbrechen',
+  'getThumbnail.success': 'Vorschaubild erfolgreich gesetzt',
+  'getThumbnail.error.fetch': 'Vorschaubild konnte nicht abgerufen werden',
+  'getThumbnail.error.upload': 'Vorschaubild konnte nicht hochgeladen werden',
+  'getThumbnail.error.unsupported': 'Nicht unterstützte Video-URL',
 });

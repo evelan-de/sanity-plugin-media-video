@@ -21,4 +21,14 @@ export const DEFAULT_EN_SCHEMA_TRANSLATIONS = removeUndefinedLocaleResources({
   'videoUrl.title': 'Video Link',
   'videoUrl.required.title': 'Video Link is required',
   'muxVideo.required.title': 'Mux Video is required',
+  'getThumbnail.button.title': 'Get Thumbnail',
+  'getThumbnail.dialog.title': 'Set Thumbnail',
+  'getThumbnail.dialog.description':
+    'This will replace the current image. Continue?',
+  'getThumbnail.dialog.confirm': 'Confirm',
+  'getThumbnail.dialog.cancel': 'Cancel',
+  'getThumbnail.success': 'Thumbnail set successfully',
+  'getThumbnail.error.fetch': 'Failed to fetch thumbnail',
+  'getThumbnail.error.upload': 'Failed to upload thumbnail',
+  'getThumbnail.error.unsupported': 'Unsupported video URL',
 });
